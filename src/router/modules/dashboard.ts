@@ -16,7 +16,7 @@ const dashboard: RouteRecordRaw = {
       },
     },
   ],
-  meta: { requireAuth: true, locale: '控制台' },
+  meta: { requireAuth: true, locale: '控制台', icon: 'icon-dashboard' },
 };
 
 export default dashboard;

@@ -1,7 +1,9 @@
 {
-  "hideMenu": false,
   "navbar": true,
   "device": "desktop",
   "theme": "light",
-  "menuCollapse": false
+  "menu": true,
+  "hideMenu": false,
+  "menuCollapse": false,
+  "menuWidth": 220
 }

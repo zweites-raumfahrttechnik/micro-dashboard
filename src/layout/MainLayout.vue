@@ -1,16 +1,46 @@
 <script lang="ts" setup>
-import { Layout, LayoutSider } from '@arco-design/web-vue';
+import { Layout, LayoutSider, LayoutContent, Drawer } from '@arco-design/web-vue';
 import { useAppModelMap } from '@/hooks';
 
+import PageLayout from './PageLayout.vue';
 import Navbar from './components/NavbarComponent.vue';
 import Menu from './components/MenuComponent.vue';
+import Footer from './components/FooterComponent.vue';
 
-const { hideMenu, navbar } = useAppModelMap();
+const {
+  hideMenu,
+  navbar,
+  menuWidth: menuWidthInModel,
+  menu: renderMenu,
+  menuCollapse,
+  $patch: appPatch,
+} = useAppModelMap();
+
+const menuWidth = computed(() => {
+  return menuCollapse.value ? 48 : menuWidthInModel.value;
+});
+
+const paddingStyle = computed(() => {
+  const paddingLeft =
+    renderMenu.value && !hideMenu.value ? { paddingLeft: `${menuWidth.value}px` } : {};
+  const paddingTop = navbar.value ? { paddingTop: '60px' } : {};
+
+  return { ...paddingLeft, ...paddingTop };
+});
 
 const drawerVisible = ref(false);
+
+const handleDrawerCancel = () => {
+  drawerVisible.value = false;
+};
+
 provide('toggleDrawerMenu', () => {
   drawerVisible.value = !drawerVisible.value;
 });
+
+const handleCollapse = (val: boolean) => {
+  appPatch({ menuCollapse: val });
+};
 </script>
 
 <template>
@@ -20,16 +50,44 @@ provide('toggleDrawerMenu', () => {
     </div>
 
     <Layout>
+      <!-- pc -->
       <LayoutSider
+        v-if="renderMenu"
+        v-show="!hideMenu"
         class="layout-sider"
+        breakpoint="xl"
         :style="{ paddingTop: navbar ? '60px' : '' }"
+        :width="menuWidth"
+        :collapsed="menuCollapse"
         :collapsible="true"
         :hide-trigger="true"
+        @collapse="handleCollapse"
       >
         <div class="menu-wrapper">
           <Menu />
         </div>
       </LayoutSider>
+
+      <!-- mobile -->
+      <Drawer
+        v-if="hideMenu"
+        mask-closable
+        placement="left"
+        :visible="drawerVisible"
+        :footer="false"
+        :closable="false"
+        @cancel="handleDrawerCancel"
+      >
+        <Menu />
+      </Drawer>
+
+      <Layout class="layout-content" :style="paddingStyle">
+        <LayoutContent>
+          <PageLayout />
+        </LayoutContent>
+
+        <Footer />
+      </Layout>
     </Layout>
   </Layout>
 </template>
@@ -97,5 +155,12 @@ provide('toggleDrawerMenu', () => {
       background-color: var(--color-text-3);
     }
   }
+}
+
+.layout-content {
+  min-height: 100vh;
+  overflow-y: hidden;
+  background-color: var(--color-fill-2);
+  transition: padding 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
 }
 </style>

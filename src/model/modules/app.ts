@@ -2,11 +2,13 @@ import { defineStore } from 'pinia';
 import defaultSettings from '@/config/settings.json';
 
 interface AppState {
-  theme: string;
   navbar: boolean;
+  device: string;
+  theme: string;
+  menu: boolean;
   hideMenu: boolean;
   menuCollapse: boolean;
-  device: string;
+  menuWidth: number;
   [key: string]: unknown;
 }
 
