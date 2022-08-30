@@ -29,8 +29,10 @@
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.35.1",
+    "@types/nprogress": "^0.2.0",
     "@vueuse/core": "^9.1.0",
     "axios": "^0.27.2",
+    "nprogress": "^0.2.0",
     "pinia": "^2.0.20",
     "vue": "^3.2.37",
     "vue-router": "4"
