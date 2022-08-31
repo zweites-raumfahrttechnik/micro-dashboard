@@ -2,10 +2,14 @@
 import { Layout, LayoutSider, LayoutContent, Drawer } from '@arco-design/web-vue';
 import { useAppModelMap } from '@/hooks';
 
+import { useResponsive } from './hooks';
+
 import PageLayout from './PageLayout.vue';
 import Navbar from './components/NavbarComponent.vue';
 import Menu from './components/MenuComponent.vue';
 import Footer from './components/FooterComponent.vue';
+
+useResponsive();
 
 const {
   hideMenu,
