@@ -90,6 +90,21 @@ const useMenuKeys = (menuTree: ComputedRef<RouteRecordRaw[]>) => {
     return res;
   };
 
+  watch(
+    () => route.meta,
+    newVal => {
+      const { requireAuth, activeMenu, hideInMenu } = newVal;
+      if (requireAuth && (!hideInMenu || activeMenu)) {
+        const menuOpenKeys = findMenuOpenKeys((activeMenu || route.name) as string);
+
+        const keySet = new Set([...menuOpenKeys, ...openKeys.value]);
+        openKeys.value = [...keySet];
+
+        selectedKey.value = [activeMenu || menuOpenKeys[menuOpenKeys.length - 1]];
+      }
+    },
+  );
+
   const { requireAuth, activeMenu, hideInMenu } = route.meta;
   if (requireAuth && (!hideInMenu || activeMenu)) {
     const menuOpenKeys = findMenuOpenKeys((activeMenu || route.name) as string);

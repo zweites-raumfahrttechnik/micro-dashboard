@@ -1,3 +1,4 @@
 import useAppModelMap from './useAppModelMap';
+import useTabModelMap from './useTabModelMap';
 
-export { useAppModelMap };
+export { useAppModelMap, useTabModelMap };

@@ -7,6 +7,7 @@ import { useResponsive } from './hooks';
 import PageLayout from './PageLayout.vue';
 import Navbar from './components/NavbarComponent.vue';
 import Menu from './components/MenuComponent.vue';
+import Tabbar from './components/TabbarComponent.vue';
 import Footer from './components/FooterComponent.vue';
 
 useResponsive();
@@ -86,6 +87,8 @@ const handleCollapse = (val: boolean) => {
       </Drawer>
 
       <Layout class="layout-content" :style="paddingStyle">
+        <Tabbar />
+
         <LayoutContent>
           <PageLayout />
         </LayoutContent>
