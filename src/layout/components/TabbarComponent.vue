@@ -35,6 +35,40 @@ watchEffect(() => {
 });
 
 const offsetTop = computed(() => (navbar.value ? 60 : 0));
+
+const currentIdx = computed(() => {
+  for (let i = 0; i < tabList.value.length; i++) {
+    if (tabList.value[i].fullPath === route.fullPath) {
+      return i;
+    }
+  }
+
+  return 0;
+});
+
+const disabledCurrent = computed(() => {
+  if (currentIdx.value === 0) {
+    return true;
+  }
+
+  return false;
+});
+
+const disabledLeft = computed(() => {
+  if (currentIdx.value === 0 || currentIdx.value === 1) {
+    return true;
+  }
+
+  return false;
+});
+
+const disabledRight = computed(() => {
+  if (currentIdx.value === tabList.value.length - 1) {
+    return true;
+  }
+
+  return false;
+});
 </script>
 
 <template>
@@ -64,15 +98,15 @@ const offsetTop = computed(() => (navbar.value ? 60 : 0));
                 <IconRefresh />
                 <span>重新加载</span>
               </Doption>
-              <Doption class="sperate-line">
+              <Doption class="sperate-line" :disabled="disabledCurrent">
                 <IconClose />
                 <span>关闭当前标签页</span>
               </Doption>
-              <Doption>
+              <Doption :disabled="disabledLeft">
                 <IconToLeft />
                 <span>关闭左侧标签页</span>
               </Doption>
-              <Doption class="sperate-line">
+              <Doption class="sperate-line" :disabled="disabledRight">
                 <IconToRight />
                 <span>关闭右侧标签页</span>
               </Doption>

@@ -10,7 +10,7 @@ NProgress.configure({ showSpinner: false });
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [{ path: '/', redirect: 'login' }, ...appRoutes],
+  routes: [...appRoutes],
   scrollBehavior() {
     return { top: 0 };
   },
