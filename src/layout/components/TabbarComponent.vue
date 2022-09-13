@@ -11,14 +11,26 @@ import {
 } from '@arco-design/web-vue/es/icon';
 import { AffixInstance } from '@arco-design/web-vue/es/affix';
 import { useAppModelMap, useTabModelMap } from '@/hooks';
+import { REDIRECT_NAME } from '@/router/modules/base';
 
 const { navbar } = useAppModelMap();
-const { tabList, updateTabList, deleteTab } = useTabModelMap();
+const { tabList, updateTabList, deleteTab, deleteTabRange } = useTabModelMap();
 
 const route = useRoute();
 const router = useRouter();
 
 const affixRef = ref<AffixInstance>();
+
+const handleUpdateTab = () => {
+  if (route.meta.noAffix || tabList.value.some(item => item.fullPath === route.fullPath)) {
+    return;
+  }
+  updateTabList(route);
+};
+
+onMounted(() => {
+  handleUpdateTab();
+});
 
 watch(
   () => navbar,
@@ -27,12 +39,12 @@ watch(
   },
 );
 
-watchEffect(() => {
-  if (route.meta.noAffix || tabList.value.some(item => item.fullPath === route.fullPath)) {
-    return;
-  }
-  updateTabList(route);
-});
+watch(
+  () => route.fullPath,
+  () => {
+    handleUpdateTab();
+  },
+);
 
 const offsetTop = computed(() => (navbar.value ? 60 : 0));
 
@@ -69,6 +81,36 @@ const disabledRight = computed(() => {
 
   return false;
 });
+
+const handleRefresh = async () => {
+  await router.push({
+    name: REDIRECT_NAME,
+    params: { path: route.fullPath },
+  });
+};
+
+const handleClose = (idx?: number) => {
+  const index = idx ? idx : currentIdx.value;
+  deleteTab(index);
+  router.push({ name: tabList.value[index - 1].name });
+};
+
+const handleCloseLeft = () => {
+  deleteTabRange(1, currentIdx.value);
+};
+
+const handleCloseRight = () => {
+  deleteTabRange(currentIdx.value + 1, tabList.value.length);
+};
+
+const handleCloseOthers = () => {
+  deleteTabRange(currentIdx.value);
+};
+
+const handleCloseAll = () => {
+  deleteTabRange(1, tabList.value.length);
+  router.push({ name: tabList.value[0].name });
+};
 </script>
 
 <template>
@@ -83,7 +125,7 @@ const disabledRight = computed(() => {
               :color="item.fullPath === route.fullPath ? 'blue' : ''"
               closable
               @click="() => router.push(item.fullPath)"
-              @close="() => deleteTab(index, item.name)"
+              @close="() => handleClose(index)"
             >
               {{ item.title }}
             </Tag>
@@ -94,27 +136,31 @@ const disabledRight = computed(() => {
             <IconMenu />
 
             <template #content>
-              <Doption>
+              <Doption @click="handleRefresh">
                 <IconRefresh />
                 <span>重新加载</span>
               </Doption>
-              <Doption class="sperate-line" :disabled="disabledCurrent">
+              <Doption
+                class="sperate-line"
+                :disabled="disabledCurrent"
+                @click="() => handleClose()"
+              >
                 <IconClose />
                 <span>关闭当前标签页</span>
               </Doption>
-              <Doption :disabled="disabledLeft">
+              <Doption :disabled="disabledLeft" @click="handleCloseLeft">
                 <IconToLeft />
                 <span>关闭左侧标签页</span>
               </Doption>
-              <Doption class="sperate-line" :disabled="disabledRight">
+              <Doption class="sperate-line" :disabled="disabledRight" @click="handleCloseRight">
                 <IconToRight />
                 <span>关闭右侧标签页</span>
               </Doption>
-              <Doption>
+              <Doption @click="handleCloseOthers">
                 <IconSwap />
                 <span>关闭其他标签页</span>
               </Doption>
-              <Doption>
+              <Doption @click="handleCloseAll">
                 <IconFolderDelete />
                 <span>关闭全部标签页</span>
               </Doption>

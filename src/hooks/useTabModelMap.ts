@@ -11,6 +11,8 @@ const useTabModelMap = () => {
     cacheList,
     updateTabList: tabModel.updateTabList,
     deleteTab: tabModel.deleteTab,
+    deleteTabOthers: tabModel.deleteTabOthers,
+    deleteTabRange: tabModel.deleteTabRange,
   };
 };
 

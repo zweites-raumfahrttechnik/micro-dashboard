@@ -1,6 +1,8 @@
 import { RouteRecordRaw } from 'vue-router';
 import { MAIN_LAYOUT } from '@/router/constant';
 
+export const REDIRECT_NAME = 'Redirect';
+
 const base: RouteRecordRaw[] = [
   {
     path: '/',
@@ -25,7 +27,7 @@ const base: RouteRecordRaw[] = [
     children: [
       {
         path: '/redirect/:path',
-        name: 'Redirect',
+        name: REDIRECT_NAME,
         component: () => import('@/pages/RedirectPage.vue'),
         meta: {
           requireAuth: true,
