@@ -10,6 +10,8 @@ interface AppState {
   hideMenu: boolean;
   menuCollapse: boolean;
   menuWidth: number;
+  footer: boolean;
+  settingVisible: boolean;
   [key: string]: unknown;
 }
 
@@ -26,6 +28,10 @@ const useAppModel = defineStore('app-model', {
 
       this.theme = 'light';
       document.body.removeAttribute('arco-theme');
+    },
+
+    toggleSettingVisible() {
+      this.settingVisible = !this.settingVisible;
     },
   },
 });

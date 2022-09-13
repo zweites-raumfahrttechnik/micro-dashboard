@@ -9,6 +9,7 @@ import Navbar from './components/NavbarComponent.vue';
 import Menu from './components/MenuComponent.vue';
 import Tabbar from './components/TabbarComponent.vue';
 import Footer from './components/FooterComponent.vue';
+import Settings from './components/settings/SettingsComponent.vue';
 
 useResponsive();
 
@@ -19,6 +20,7 @@ const {
   menuWidth: menuWidthInModel,
   menu: renderMenu,
   menuCollapse,
+  footer,
   $patch: appPatch,
 } = useAppModelMap();
 
@@ -94,10 +96,12 @@ const handleCollapse = (val: boolean) => {
           <PageLayout />
         </LayoutContent>
 
-        <Footer />
+        <Footer v-if="footer" />
       </Layout>
     </Layout>
   </Layout>
+
+  <Settings />
 </template>
 
 <style lang="less" scoped>

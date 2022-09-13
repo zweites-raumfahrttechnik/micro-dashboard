@@ -11,6 +11,8 @@ const useAppModelMap = () => {
   const hideMenu = computed(() => appModel.hideMenu);
   const menuCollapse = computed(() => appModel.menuCollapse);
   const menuWidth = computed(() => appModel.menuWidth);
+  const footer = computed(() => appModel.footer);
+  const settingVisible = computed(() => appModel.settingVisible);
 
   return {
     navbar,
@@ -21,8 +23,11 @@ const useAppModelMap = () => {
     hideMenu,
     menuCollapse,
     menuWidth,
+    footer,
+    settingVisible,
     $patch: appModel.$patch,
     toggleTheme: appModel.toggleTheme,
+    toggleSettingVisible: appModel.toggleSettingVisible,
   };
 };
 

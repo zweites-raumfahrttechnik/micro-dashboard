@@ -20,7 +20,7 @@ import {
 } from '@arco-design/web-vue/es/icon';
 import { useAppModelMap } from '@/hooks';
 
-const { device, theme, toggleTheme: appToggleTheme } = useAppModelMap();
+const { device, theme, toggleTheme: appToggleTheme, toggleSettingVisible } = useAppModelMap();
 
 const toggleDrawerMenu = inject('toggleDrawerMenu') as () => void;
 
@@ -87,7 +87,7 @@ const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
 
       <li>
         <Tooltip :content="'页面设置'">
-          <Button class="nav-btn" type="outline" :shape="'circle'">
+          <Button class="nav-btn" type="outline" :shape="'circle'" @click="toggleSettingVisible">
             <template #icon>
               <IconSettings />
             </template>

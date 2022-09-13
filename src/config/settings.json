@@ -6,5 +6,7 @@
   "menu": true,
   "hideMenu": false,
   "menuCollapse": false,
-  "menuWidth": 220
+  "menuWidth": 220,
+  "footer": true,
+  "settingVisible": false
 }
