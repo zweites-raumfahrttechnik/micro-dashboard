@@ -4,6 +4,7 @@ const useAppModelMap = () => {
   const appModel = useAppModel();
 
   const navbar = computed(() => appModel.navbar);
+  const tabbar = computed(() => appModel.tabbar);
   const device = computed(() => appModel.device);
   const theme = computed(() => appModel.theme);
   const menu = computed(() => appModel.menu);
@@ -13,6 +14,7 @@ const useAppModelMap = () => {
 
   return {
     navbar,
+    tabbar,
     device,
     theme,
     menu,

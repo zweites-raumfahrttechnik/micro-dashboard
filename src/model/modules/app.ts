@@ -3,6 +3,7 @@ import defaultSettings from '@/config/settings.json';
 
 interface AppState {
   navbar: boolean;
+  tabbar: boolean;
   device: string;
   theme: string;
   menu: boolean;

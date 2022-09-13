@@ -15,6 +15,7 @@ useResponsive();
 const {
   hideMenu,
   navbar,
+  tabbar,
   menuWidth: menuWidthInModel,
   menu: renderMenu,
   menuCollapse,
@@ -87,7 +88,7 @@ const handleCollapse = (val: boolean) => {
       </Drawer>
 
       <Layout class="layout-content" :style="paddingStyle">
-        <Tabbar />
+        <Tabbar v-if="tabbar" />
 
         <LayoutContent>
           <PageLayout />

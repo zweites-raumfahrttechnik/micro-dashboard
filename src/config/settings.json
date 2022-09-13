@@ -1,5 +1,6 @@
 {
   "navbar": true,
+  "tabbar": false,
   "device": "desktop",
   "theme": "light",
   "menu": true,
