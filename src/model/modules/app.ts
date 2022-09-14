@@ -34,6 +34,9 @@ const useAppModel = defineStore('app-model', {
       this.settingVisible = !this.settingVisible;
     },
   },
+  storage: {
+    enabled: true,
+  },
 });
 
 export type { AppState };
