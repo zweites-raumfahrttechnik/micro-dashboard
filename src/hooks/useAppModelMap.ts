@@ -3,6 +3,7 @@ import { useAppModel } from '@/model';
 const useAppModelMap = () => {
   const appModel = useAppModel();
 
+  const title = computed(() => appModel.title);
   const navbar = computed(() => appModel.navbar);
   const tabbar = computed(() => appModel.tabbar);
   const device = computed(() => appModel.device);
@@ -15,6 +16,7 @@ const useAppModelMap = () => {
   const settingVisible = computed(() => appModel.settingVisible);
 
   return {
+    title,
     navbar,
     tabbar,
     device,

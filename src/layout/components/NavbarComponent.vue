@@ -20,7 +20,13 @@ import {
 } from '@arco-design/web-vue/es/icon';
 import { useAppModelMap } from '@/hooks';
 
-const { device, theme, toggleTheme: appToggleTheme, toggleSettingVisible } = useAppModelMap();
+const {
+  title,
+  device,
+  theme,
+  toggleTheme: appToggleTheme,
+  toggleSettingVisible,
+} = useAppModelMap();
 
 const toggleDrawerMenu = inject('toggleDrawerMenu') as () => void;
 
@@ -52,7 +58,7 @@ const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
           src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
         />
         <TypographyTitle :style="{ margin: 0, fontSize: '18px' }" :heading="5">
-          Arco Pro
+          {{ title }}
         </TypographyTitle>
         <IconMenuFold
           v-if="device === 'mobile'"

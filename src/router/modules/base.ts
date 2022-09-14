@@ -6,7 +6,7 @@ export const REDIRECT_NAME = 'Redirect';
 const base: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: 'Login',
+    redirect: '/login',
   },
   {
     path: '/login',

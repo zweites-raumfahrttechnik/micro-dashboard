@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import defaultSettings from '@/config/settings.json';
 
 interface AppState {
+  title: string;
   navbar: boolean;
   tabbar: boolean;
   device: string;

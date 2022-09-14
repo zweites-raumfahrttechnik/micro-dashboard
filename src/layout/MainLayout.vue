@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { Layout, LayoutSider, LayoutContent, Drawer } from '@arco-design/web-vue';
 import { useAppModelMap } from '@/hooks';
+import Footer from '@/components/FooterComponent.vue';
 
 import { useResponsive } from './hooks';
 
@@ -8,7 +9,6 @@ import PageLayout from './PageLayout.vue';
 import Navbar from './components/NavbarComponent.vue';
 import Menu from './components/MenuComponent.vue';
 import Tabbar from './components/TabbarComponent.vue';
-import Footer from './components/FooterComponent.vue';
 import Settings from './components/settings/SettingsComponent.vue';
 
 useResponsive();
