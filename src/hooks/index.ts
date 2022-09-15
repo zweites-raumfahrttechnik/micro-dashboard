@@ -1,1 +1,3 @@
-export {};
+import useRouteTitle from './useRouteTitle';
+
+export { useRouteTitle };
