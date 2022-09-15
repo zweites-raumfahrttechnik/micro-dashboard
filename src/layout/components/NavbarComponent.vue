@@ -18,15 +18,9 @@ import {
   IconUser,
   IconExport,
 } from '@arco-design/web-vue/es/icon';
-import { useAppModelMap } from '@/hooks';
+import { useAppModel } from '@/model';
 
-const {
-  title,
-  device,
-  theme,
-  toggleTheme: appToggleTheme,
-  toggleSettingVisible,
-} = useAppModelMap();
+const { state, toggleTheme: appToggleTheme, toggleSettingVisible } = useAppModel();
 
 const toggleDrawerMenu = inject('toggleDrawerMenu') as () => void;
 
@@ -58,10 +52,10 @@ const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
           src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
         />
         <TypographyTitle :style="{ margin: 0, fontSize: '18px' }" :heading="5">
-          {{ title }}
+          {{ state.title }}
         </TypographyTitle>
         <IconMenuFold
-          v-if="device === 'mobile'"
+          v-if="state.device === 'mobile'"
           style="font-size: 22px; cursor: pointer"
           @click="toggleDrawerMenu"
         />
@@ -70,10 +64,10 @@ const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
 
     <ul class="right-side">
       <li>
-        <Tooltip :content="theme === 'dark' ? '点击切换到亮色模式' : '点击切换到暗色模式'">
+        <Tooltip :content="state.theme === 'dark' ? '点击切换到亮色模式' : '点击切换到暗色模式'">
           <Button class="nav-btn" type="outline" :shape="'circle'" @click="handleToggleTheme">
             <template #icon>
-              <IconMoonFill v-if="theme === 'dark'" />
+              <IconMoonFill v-if="state.theme === 'dark'" />
               <IconSunFill v-else />
             </template>
           </Button>

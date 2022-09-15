@@ -36,93 +36,92 @@ const formatInfo = (route: RouteLocationNormalized): TabInfo => {
   };
 };
 
-const useTabModel = defineStore('tab-model', {
-  state: (): TabModelState => ({
-    cached: new Set([DEFAULT_NAME]),
-    list: [DEFAULT_ROUTE],
-  }),
+const useTabModel = createGlobalState(() => {
+  const cached = ref(new Set([DEFAULT_NAME]));
+  const tabList = ref([DEFAULT_ROUTE]);
 
-  getters: {
-    tabList(): TabInfo[] {
-      return this.list;
-    },
-    cacheList(): string[] {
-      return Array.from(this.cached);
-    },
-  },
+  const cacheList = computed(() => Array.from(cached.value));
 
-  actions: {
-    updateTabList(route: RouteLocationNormalized) {
-      console.log(route.fullPath);
-      if (BAN_LIST.includes(route.name as string)) {
-        return;
+  const updateTabList = (route: RouteLocationNormalized) => {
+    console.log(route.fullPath);
+    if (BAN_LIST.includes(route.name as string)) {
+      return;
+    }
+    tabList.value.push(formatInfo(route));
+    if (!route.meta.ignoreCache) {
+      cached.value.add(route.name as string);
+    }
+  };
+
+  const deleteTab = (idx: number) => {
+    if (idx === 0) {
+      return;
+    }
+
+    cached.value.delete(tabList.value[idx].name);
+    tabList.value.splice(idx, 1);
+  };
+
+  const deleteTabOthers = (idx: number) => {
+    for (let i = 1; i < tabList.value.length; i++) {
+      if (i === idx) {
+        continue;
       }
-      this.list.push(formatInfo(route));
-      if (!route.meta.ignoreCache) {
-        this.cached.add(route.name as string);
-      }
-    },
+      cached.value.delete(tabList.value[i].name);
+    }
 
-    deleteTab(idx: number) {
-      if (idx === 0) {
-        return;
-      }
-
-      this.cached.delete(this.list[idx].name);
-      this.list.splice(idx, 1);
-    },
-
-    deleteTabOthers(idx: number) {
-      for (let i = 1; i < this.list.length; i++) {
-        if (i === idx) {
-          continue;
-        }
-        this.cached.delete(this.list[i].name);
-      }
-
-      this.list = this.list.filter((_, index) => {
-        if (index === 0 || index === idx) {
-          return true;
-        }
-
-        return false;
-      });
-    },
-
-    deleteTabRange(start?: number, end?: number) {
-      if (start === undefined && end === undefined) {
-        return;
-      }
-
-      let rStart = 1,
-        rEnd = this.list.length;
-      if (start !== undefined) {
-        if (start === 0) {
-          start = 1;
-        }
-        rStart = start;
-      }
-
-      if (end !== undefined) {
-        rEnd = end;
-      }
-
-      if (rStart >= rEnd) {
-        return;
-      }
-
-      for (let i = rStart; i < rEnd; i++) {
-        this.cached.delete(this.list[i].name);
-      }
-      this.list = this.list.filter((_, idx) => {
-        if (idx >= rStart && idx < rEnd) {
-          return false;
-        }
-
+    tabList.value = tabList.value.filter((_, index) => {
+      if (index === 0 || index === idx) {
         return true;
-      });
-    },
-  },
+      }
+
+      return false;
+    });
+  };
+
+  const deleteTabRange = (start?: number, end?: number) => {
+    if (start === undefined && end === undefined) {
+      return;
+    }
+
+    let rStart = 1,
+      rEnd = tabList.value.length;
+    if (start !== undefined) {
+      if (start === 0) {
+        start = 1;
+      }
+      rStart = start;
+    }
+
+    if (end !== undefined) {
+      rEnd = end;
+    }
+
+    if (rStart >= rEnd) {
+      return;
+    }
+
+    for (let i = rStart; i < rEnd; i++) {
+      cached.value.delete(tabList.value[i].name);
+    }
+    tabList.value = tabList.value.filter((_, idx) => {
+      if (idx >= rStart && idx < rEnd) {
+        return false;
+      }
+
+      return true;
+    });
+  };
+
+  return {
+    cached,
+    tabList,
+    cacheList,
+    updateTabList,
+    deleteTab,
+    deleteTabRange,
+    deleteTabOthers,
+  };
 });
 
 export type { TabInfo, TabModelState };

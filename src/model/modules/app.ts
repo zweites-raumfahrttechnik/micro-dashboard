@@ -1,4 +1,3 @@
-import { defineStore } from 'pinia';
 import defaultSettings from '@/config/settings.json';
 
 interface AppState {
@@ -16,28 +15,31 @@ interface AppState {
   [key: string]: unknown;
 }
 
-const useAppModel = defineStore('app-model', {
-  state: (): AppState => ({ ...defaultSettings }),
+const useAppModel = createGlobalState(() => {
+  const state = reactive<AppState>({ ...defaultSettings });
 
-  actions: {
-    toggleTheme(dark: boolean) {
-      if (dark) {
-        this.theme = 'dark';
-        document.body.setAttribute('arco-theme', 'dark');
-        return;
-      }
+  const patch = (s: Partial<AppState>) => {
+    Object.keys(s).forEach(k => {
+      state[k] = s[k];
+    });
+  };
 
-      this.theme = 'light';
-      document.body.removeAttribute('arco-theme');
-    },
+  const toggleTheme = (dark: boolean) => {
+    if (dark) {
+      state.theme = 'dark';
+      document.body.setAttribute('arco-theme', 'dark');
+      return;
+    }
 
-    toggleSettingVisible() {
-      this.settingVisible = !this.settingVisible;
-    },
-  },
-  storage: {
-    enabled: true,
-  },
+    state.theme = 'light';
+    document.body.removeAttribute('arco-theme');
+  };
+
+  const toggleSettingVisible = () => {
+    state.settingVisible = !state.settingVisible;
+  };
+
+  return { state, patch, toggleTheme, toggleSettingVisible };
 });
 
 export type { AppState };

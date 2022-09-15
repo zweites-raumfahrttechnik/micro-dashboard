@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { RouterView } from 'vue-router';
-import { useTabModelMap } from '@/hooks';
+import { useTabModel } from '@/model';
 
-const { cacheList } = useTabModelMap();
+const { cacheList } = useTabModel();
 </script>
 
 <template>

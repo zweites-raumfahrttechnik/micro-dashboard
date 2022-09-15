@@ -9,9 +9,11 @@ import {
   Checkbox,
 } from '@arco-design/web-vue';
 import { IconUser, IconLock } from '@arco-design/web-vue/es/icon';
-import { useAppModelMap } from '@/hooks';
+import { useAppModel } from '@/model';
 
-const { title } = useAppModelMap();
+const {
+  state: { title },
+} = useAppModel();
 
 const userInfo = reactive({
   username: '',

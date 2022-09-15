@@ -1,54 +1,53 @@
 <script lang="ts" setup>
 import { Button, Drawer } from '@arco-design/web-vue';
 import { IconSettings } from '@arco-design/web-vue/es/icon';
-import { useAppModelMap } from '@/hooks';
+import { useAppModel } from '@/model';
 
 import SettingsBlock from './SettingsBlock.vue';
 import { Option } from './props';
 
-const { settingVisible, navbar, menu, footer, tabbar, menuWidth, $patch, toggleSettingVisible } =
-  useAppModelMap();
+const { state, patch, toggleSettingVisible } = useAppModel();
 
 const layoutOptions = computed((): Option[] => [
   {
     name: '导航栏',
     type: 'switch',
-    value: navbar.value,
+    value: state.navbar,
     change: (val: unknown) => {
-      $patch({ navbar: val as boolean });
+      patch({ navbar: val as boolean });
     },
   },
   {
     name: '菜单栏',
     type: 'switch',
-    value: menu.value,
+    value: state.menu,
     change: (val: unknown) => {
-      $patch({ menu: val as boolean });
+      patch({ menu: val as boolean });
     },
   },
   {
     name: '页脚',
     type: 'switch',
-    value: footer.value,
+    value: state.footer,
     change: (val: unknown) => {
-      $patch({ footer: val as boolean });
+      patch({ footer: val as boolean });
     },
   },
   {
     name: '多标签',
     type: 'switch',
-    value: tabbar.value,
+    value: state.tabbar,
     change: (val: unknown) => {
-      $patch({ tabbar: val as boolean });
+      patch({ tabbar: val as boolean });
     },
   },
   {
     name: '菜单宽度',
     type: 'number',
-    value: menuWidth.value,
-    disabled: menu.value === false,
+    value: state.menuWidth,
+    disabled: state.menu === false,
     change: (val: unknown) => {
-      $patch({ menuWidth: val as number });
+      patch({ menuWidth: val as number });
     },
   },
 ]);
@@ -59,7 +58,7 @@ const handleDrawerCancel = () => {
 </script>
 
 <template>
-  <div v-if="!navbar" class="fixed-setting-wrapper">
+  <div v-if="!state.navbar" class="fixed-setting-wrapper">
     <Button type="primary" @click="toggleSettingVisible">
       <template #icon>
         <IconSettings size="18" />
@@ -70,7 +69,7 @@ const handleDrawerCancel = () => {
   <Drawer
     :width="300"
     unmount-on-close
-    :visible="settingVisible"
+    :visible="state.settingVisible"
     :footer="false"
     @cancel="handleDrawerCancel"
   >

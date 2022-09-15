@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Layout, LayoutSider, LayoutContent, Drawer } from '@arco-design/web-vue';
-import { useAppModelMap } from '@/hooks';
+import { useAppModel } from '@/model';
 import Footer from '@/components/FooterComponent.vue';
 
 import { useResponsive } from './hooks';
@@ -13,25 +13,15 @@ import Settings from './components/settings/SettingsComponent.vue';
 
 useResponsive();
 
-const {
-  hideMenu,
-  navbar,
-  tabbar,
-  menuWidth: menuWidthInModel,
-  menu: renderMenu,
-  menuCollapse,
-  footer,
-  $patch: appPatch,
-} = useAppModelMap();
+const { state, patch: appPatch } = useAppModel();
 
 const menuWidth = computed(() => {
-  return menuCollapse.value ? 48 : menuWidthInModel.value;
+  return state.menuCollapse ? 48 : state.menuWidth;
 });
 
 const paddingStyle = computed(() => {
-  const paddingLeft =
-    renderMenu.value && !hideMenu.value ? { paddingLeft: `${menuWidth.value}px` } : {};
-  const paddingTop = navbar.value ? { paddingTop: '60px' } : {};
+  const paddingLeft = state.menu && !state.hideMenu ? { paddingLeft: `${menuWidth.value}px` } : {};
+  const paddingTop = state.navbar ? { paddingTop: '60px' } : {};
 
   return { ...paddingLeft, ...paddingTop };
 });
@@ -52,21 +42,21 @@ const handleCollapse = (val: boolean) => {
 </script>
 
 <template>
-  <Layout class="layout" :class="{ mobile: hideMenu }">
-    <div v-if="navbar" class="layout-navbar">
+  <Layout class="layout" :class="{ mobile: state.hideMenu }">
+    <div v-if="state.navbar" class="layout-navbar">
       <Navbar />
     </div>
 
     <Layout>
       <!-- pc -->
       <LayoutSider
-        v-if="renderMenu"
-        v-show="!hideMenu"
+        v-if="state.menu"
+        v-show="!state.hideMenu"
         class="layout-sider"
         breakpoint="xl"
-        :style="{ paddingTop: navbar ? '60px' : '' }"
-        :width="menuWidth"
-        :collapsed="menuCollapse"
+        :style="{ paddingTop: state.navbar ? '60px' : '' }"
+        :width="state.menuWidth"
+        :collapsed="state.menuCollapse"
         :collapsible="true"
         :hide-trigger="true"
         @collapse="handleCollapse"
@@ -78,7 +68,7 @@ const handleCollapse = (val: boolean) => {
 
       <!-- mobile -->
       <Drawer
-        v-if="hideMenu"
+        v-if="state.hideMenu"
         mask-closable
         placement="left"
         :visible="drawerVisible"
@@ -90,13 +80,13 @@ const handleCollapse = (val: boolean) => {
       </Drawer>
 
       <Layout class="layout-content" :style="paddingStyle">
-        <Tabbar v-if="tabbar" />
+        <Tabbar v-if="state.tabbar" />
 
         <LayoutContent>
           <PageLayout />
         </LayoutContent>
 
-        <Footer v-if="footer" />
+        <Footer v-if="state.footer" />
       </Layout>
     </Layout>
   </Layout>

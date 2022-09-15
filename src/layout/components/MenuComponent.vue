@@ -2,7 +2,7 @@
 import { compile } from 'vue';
 import { RouteRecordRaw } from 'vue-router';
 import { Menu, SubMenu, MenuItem } from '@arco-design/web-vue';
-import { useAppModelMap } from '@/hooks';
+import { useAppModel } from '@/model';
 
 import { useMenuKeys, useMenuTree } from './menuHooks';
 
@@ -10,17 +10,17 @@ export default defineComponent({
   emits: ['collapse'],
   setup() {
     const router = useRouter();
-    const { device, menuCollapse, $patch: appPatch } = useAppModelMap();
+    const { state, patch: appPatch } = useAppModel();
     const { menuTree } = useMenuTree();
     const { selectedKey, openKeys } = useMenuKeys(menuTree);
 
     const collapsed = computed({
       get() {
-        if (device.value !== 'desktop') {
+        if (state.device !== 'desktop') {
           return false;
         }
 
-        return menuCollapse.value;
+        return state.menuCollapse;
       },
       set(v: boolean) {
         appPatch({ menuCollapse: v });
@@ -28,7 +28,7 @@ export default defineComponent({
     });
 
     const onCollapse = (val: boolean) => {
-      if (device.value === 'desktop') {
+      if (state.device === 'desktop') {
         appPatch({ menuCollapse: val });
       }
     };
@@ -68,7 +68,7 @@ export default defineComponent({
       <Menu
         v-model:collapsed={collapsed.value}
         v-model:open-keys={openKeys.value}
-        show-collapse-button={device.value !== 'mobile'}
+        show-collapse-button={state.device !== 'mobile'}
         selected-keys={selectedKey.value}
         auto-open={false}
         auto-open-selected={true}

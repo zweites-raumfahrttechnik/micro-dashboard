@@ -1,4 +1,4 @@
-import { useAppModelMap } from '@/hooks';
+import { useAppModel } from '@/model';
 
 const WIDTH = 992;
 
@@ -8,13 +8,13 @@ const queryDevice = () => {
 };
 
 const useResponsive = (immediate = true) => {
-  const { $patch } = useAppModelMap();
+  const { patch } = useAppModel();
 
   const resizeHandler = () => {
     if (!document.hidden) {
       const isMobile = queryDevice();
 
-      $patch({ hideMenu: isMobile, device: isMobile ? 'mobile' : 'desktop' });
+      patch({ hideMenu: isMobile, device: isMobile ? 'mobile' : 'desktop' });
     }
   };
   const debounceFn = useDebounceFn(resizeHandler, 100);

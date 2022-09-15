@@ -1,11 +1,13 @@
 <script lang="ts" setup>
-import { useAppModelMap } from '@/hooks';
+import { useAppModel } from '@/model';
 import Footer from '@/components/FooterComponent.vue';
 
 import Banner from './LoginBanner.vue';
 import Form from './LoginForm.vue';
 
-const { title } = useAppModelMap();
+const {
+  state: { title },
+} = useAppModel();
 </script>
 
 <template>

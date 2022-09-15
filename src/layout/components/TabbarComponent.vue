@@ -10,11 +10,11 @@ import {
   IconFolderDelete,
 } from '@arco-design/web-vue/es/icon';
 import { AffixInstance } from '@arco-design/web-vue/es/affix';
-import { useAppModelMap, useTabModelMap } from '@/hooks';
+import { useAppModel, useTabModel } from '@/model';
 import { REDIRECT_NAME } from '@/router/modules/base';
 
-const { navbar } = useAppModelMap();
-const { tabList, updateTabList, deleteTab, deleteTabRange } = useTabModelMap();
+const { state } = useAppModel();
+const { tabList, updateTabList, deleteTab, deleteTabRange } = useTabModel();
 
 const route = useRoute();
 const router = useRouter();
@@ -33,7 +33,7 @@ onMounted(() => {
 });
 
 watch(
-  () => navbar,
+  () => state.navbar,
   () => {
     affixRef.value?.updatePosition();
   },
@@ -46,7 +46,7 @@ watch(
   },
 );
 
-const offsetTop = computed(() => (navbar.value ? 60 : 0));
+const offsetTop = computed(() => (state.navbar ? 60 : 0));
 
 const currentIdx = computed(() => {
   for (let i = 0; i < tabList.value.length; i++) {
