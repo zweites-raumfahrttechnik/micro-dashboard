@@ -13,8 +13,14 @@ const requests: MockMethod[] = [
           .fill(1)
           .map(() => ({
             uuid: Random.id(),
-            ip: Random.ip(),
-            port: Random.integer(1000, 50000),
+            instance: Array(5)
+              .fill(1)
+              .map(() => ({
+                uuid: Random.id(),
+                ip: Random.ip(),
+                port: Random.integer(1000, 50000),
+                createAt: Random.time('yyyy-MM-dd hh:mm'),
+              })),
             name: Random.string(undefined, 5, 10),
             createAt: Random.time('yyyy-MM-dd hh:mm'),
             status: Random.pick([1, 2]),

@@ -4,11 +4,17 @@ export interface UserInfo {
   uuid: string;
 }
 
-export interface ThemeListItem {
+export interface InstanceItem {
   uuid: string;
   ip: string;
   port: number;
+  createAt: string;
+}
+
+export interface ThemeListItem {
+  uuid: string;
   name: string;
+  instance: InstanceItem[];
   status: 1 | 2;
   createAt: string;
   user: UserInfo;
@@ -16,5 +22,5 @@ export interface ThemeListItem {
 
 export interface ThemeListData {
   count: number;
-  data: ThemeListData[];
+  data: ThemeListItem[];
 }

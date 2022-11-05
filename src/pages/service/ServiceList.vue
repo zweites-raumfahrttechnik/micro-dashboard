@@ -16,10 +16,13 @@ import {
   Table,
   TableColumn,
   Tag,
+  Popconfirm,
+  TableRowSelection,
+  Drawer,
 } from '@arco-design/web-vue';
 
 import { instance, ResponseWrap } from '@/api';
-import { THEME_URL } from '@/api/url';
+import { THEME_URL, THEME_INSTANCE_URL } from '@/api/url';
 import { ThemeListData } from '@/api/types';
 
 import PageContainer from '@/components/PageContainer.vue';
@@ -50,6 +53,14 @@ const pagination = reactive<{ current: number; pageSize: number; total?: number 
   pageSize: 15,
 });
 
+// 行选择器
+const rowSelection = reactive<TableRowSelection>({
+  type: 'checkbox',
+  showCheckedAll: true,
+  onlyCurrent: true,
+  selectedRowKeys: [],
+});
+
 const { data, isLoading, execute } = useAxios<ResponseWrap<ThemeListData>>(
   THEME_URL,
   {
@@ -60,6 +71,15 @@ const { data, isLoading, execute } = useAxios<ResponseWrap<ThemeListData>>(
     },
   },
   instance,
+);
+
+const { isLoading: deleteIsLoading, execute: deleteExecute } = useAxios(
+  THEME_URL,
+  {
+    method: 'DELETE',
+  },
+  instance,
+  { immediate: false },
 );
 
 const refreshList = () => {
@@ -116,6 +136,57 @@ const handleFromReset = () => {
 const handlePageChange = (page: number) => {
   pagination.current = page;
 };
+
+const handleDeleteService = async (uuid: string) => {
+  await deleteExecute({ data: { uuids: [uuid] } });
+
+  refreshList();
+};
+
+const handleDeleteSelect = async () => {
+  if (rowSelection.selectedRowKeys?.length === 0) {
+    return;
+  }
+
+  await deleteExecute({ data: { uuids: rowSelection.selectedRowKeys } });
+
+  refreshList();
+};
+
+// 下面是关于服务实例展示的代码
+const drawerVisible = ref(false);
+const selectService = ref('');
+
+const serviceInstance = computed(
+  () => tableData.value.find(item => item.uuid === selectService.value)?.instance || [],
+);
+
+const { isLoading: deleteInstanceIsLoading, execute: deleteInstanceExecute } = useAxios(
+  THEME_INSTANCE_URL,
+  {
+    method: 'DELETE',
+  },
+  instance,
+  { immediate: false },
+);
+
+const handleShowInstance = (uuid: string) => {
+  drawerVisible.value = true;
+  selectService.value = uuid;
+};
+
+const handleDisableInstance = () => {
+  drawerVisible.value = false;
+  selectService.value = '';
+};
+
+const handleDeleteInstance = async (uuid: string) => {
+  await deleteInstanceExecute({ data: { uuids: [uuid] } });
+
+  handleDisableInstance();
+
+  refreshList();
+};
 </script>
 
 <template>
@@ -159,7 +230,7 @@ const handlePageChange = (page: number) => {
 
         <Col flex="195px">
           <Space :size="18">
-            <Button type="primary" @click="handleSearch">
+            <Button type="primary" :loading="isLoading || deleteIsLoading" @click="handleSearch">
               <template #icon>
                 <IconSearch />
               </template>
@@ -177,35 +248,101 @@ const handlePageChange = (page: number) => {
 
       <Divider style="margin-top: 0" />
 
-      <Table
-        row-key="uuid"
-        :bordered="false"
-        :pagination="pagination"
-        :data="tableData"
-        :loading="isLoading"
-        @page-change="handlePageChange"
-      >
-        <template #columns>
-          <TableColumn title="服务名称" data-index="name" />
-          <TableColumn title="服务运行地址">
-            <template #cell="{ record }">
-              {{ `${record.ip}:${record.port}` }}
+      <Row justify="end" :style="{ paddingBottom: '20px' }">
+        <Col flex="86px">
+          <Button type="primary" status="danger" @click="handleDeleteSelect">删除选中</Button>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col :span="24">
+          <Table
+            v-model:selected-keys="rowSelection.selectedRowKeys"
+            row-key="uuid"
+            :bordered="false"
+            :pagination="pagination"
+            :data="tableData"
+            :loading="isLoading || deleteIsLoading"
+            :row-selection="rowSelection"
+            @page-change="handlePageChange"
+          >
+            <template #columns>
+              <TableColumn title="服务名称" data-index="name" />
+
+              <TableColumn title="创建者">
+                <template #cell="{ record }">
+                  {{ record.user.nickname }}
+                </template>
+              </TableColumn>
+
+              <TableColumn title="创建时间" data-index="createAt" />
+
+              <TableColumn title="服务上线状态">
+                <template #cell="{ record }">
+                  <Tag v-if="record.status === 2" color="green">已上线</Tag>
+                  <Tag v-else color="red">未上线</Tag>
+                </template>
+              </TableColumn>
+
+              <TableColumn title="操作">
+                <template #cell="{ record }">
+                  <Space>
+                    <Button
+                      type="text"
+                      status="normal"
+                      @click="() => handleShowInstance(record.uuid)"
+                    >
+                      详情
+                    </Button>
+
+                    <Popconfirm
+                      content="请确认是否删除此数据库连接"
+                      @ok="() => handleDeleteService(record.uuid)"
+                    >
+                      <Button type="text" status="danger">删除</Button>
+                    </Popconfirm>
+                  </Space>
+                </template>
+              </TableColumn>
             </template>
-          </TableColumn>
-          <TableColumn title="创建者">
-            <template #cell="{ record }">
-              {{ record.user.nickname }}
-            </template>
-          </TableColumn>
-          <TableColumn title="创建时间" data-index="createAt" />
-          <TableColumn title="服务上线状态">
-            <template #cell="{ record }">
-              <Tag v-if="record.status === 2" color="green">已上线</Tag>
-              <Tag v-else color="red">未上线</Tag>
-            </template>
-          </TableColumn>
-        </template>
-      </Table>
+          </Table>
+        </Col>
+      </Row>
     </Card>
   </PageContainer>
+
+  <Drawer
+    placement="bottom"
+    height="600px"
+    :visible="drawerVisible"
+    :footer="false"
+    @cancel="handleDisableInstance"
+  >
+    <template #title>服务实例列表</template>
+
+    <Row justify="center">
+      <Col :span="20">
+        <Table row-key="uuid" :bordered="false" :data="serviceInstance" :pagination="false">
+          <template #columns>
+            <TableColumn title="实例运行IP" data-index="ip" />
+
+            <TableColumn title="实例运行端口" data-index="port" />
+
+            <TableColumn title="实例创建时间" data-index="createAt" />
+
+            <TableColumn title="操作">
+              <template #cell="{ record }">
+                <Popconfirm
+                  content="请确认是否删除此实例"
+                  @ok="() => handleDeleteInstance(record.uuid)"
+                >
+                  <Button type="text" status="danger">删除</Button>
+                </Popconfirm>
+              </template>
+            </TableColumn>
+          </template>
+        </Table>
+      </Col>
+    </Row>
+  </Drawer>
 </template>
