@@ -23,9 +23,8 @@ const requests: MockMethod[] = [
               })),
             name: Random.string(undefined, 5, 10),
             createAt: Random.time('yyyy-MM-dd hh:mm'),
-            status: Random.pick([1, 2]),
             user: {
-              nickname: Random.string(undefined, 4, 8),
+              nickName: Random.string(undefined, 4, 8),
               uuid: Random.id(),
             },
           })),

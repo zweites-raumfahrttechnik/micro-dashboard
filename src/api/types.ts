@@ -1,6 +1,6 @@
 // 获取服务列表
 export interface UserInfo {
-  nickname: string;
+  nickName: string;
   uuid: string;
 }
 
@@ -15,7 +15,6 @@ export interface ThemeListItem {
   uuid: string;
   name: string;
   instance: InstanceItem[];
-  status: 1 | 2;
   createAt: string;
   user: UserInfo;
 }

@@ -6,16 +6,14 @@ import {
   Col,
   Form,
   FormItem,
-  Select,
-  Option,
   Input,
+  RangePicker,
   FormInstance,
   Divider,
   Button,
   Space,
   Table,
   TableColumn,
-  Tag,
   Popconfirm,
   TableRowSelection,
   Drawer,
@@ -30,21 +28,22 @@ import PageContainer from '@/components/PageContainer.vue';
 interface SearchParams {
   pg: number;
   size: number;
-  ip?: string;
-  port?: string;
-  status?: string;
+  name?: string;
+  user?: string;
+  startAt?: string;
+  endAt?: string;
+}
+
+interface SearchFormdata extends Omit<SearchParams, 'pg' | 'size' | 'startAt' | 'endAt'> {
+  createAt?: string[];
 }
 
 const searchFormRef = ref<FormInstance>();
 
-const searchFormdata = reactive<{
-  ip: string;
-  port: string;
-  status: string;
-}>({
-  ip: '',
-  port: '',
-  status: '',
+const searchFormdata = reactive<SearchFormdata>({
+  name: '',
+  user: '',
+  createAt: [],
 });
 
 // 分页参数
@@ -84,16 +83,18 @@ const { isLoading: deleteIsLoading, execute: deleteExecute } = useAxios(
 
 const refreshList = () => {
   const params: SearchParams = { pg: pagination.current, size: pagination.pageSize };
-  if (searchFormdata.ip && searchFormdata.ip !== '') {
-    params.ip = searchFormdata.ip;
+
+  if (searchFormdata.name && searchFormdata.name !== '') {
+    params.name = searchFormdata.name;
   }
 
-  if (searchFormdata.port && searchFormdata.port !== '') {
-    params.port = searchFormdata.port;
+  if (searchFormdata.user && searchFormdata.user !== '') {
+    params.user = searchFormdata.user;
   }
 
-  if (searchFormdata.status) {
-    params.status = searchFormdata.status;
+  if (searchFormdata.createAt && searchFormdata.createAt.length === 2) {
+    params.startAt = searchFormdata.createAt[0];
+    params.endAt = searchFormdata.createAt[1];
   }
 
   execute({ params });
@@ -205,21 +206,18 @@ const handleDeleteInstance = async (uuid: string) => {
           >
             <Row :gutter="16">
               <Col :span="8">
-                <FormItem field="ip" label="服务地址">
-                  <Input v-model="searchFormdata.ip" placeholder="请输入服务地址" />
+                <FormItem field="name" label="服务名称">
+                  <Input v-model="searchFormdata.name" placeholder="请输入服务名称" />
                 </FormItem>
               </Col>
               <Col :span="8">
-                <FormItem field="port" label="服务端口">
-                  <Input v-model="searchFormdata.port" placeholder="请输入服务端口" />
+                <FormItem field="port" label="创建者">
+                  <Input v-model="searchFormdata.user" placeholder="请输入创建者" />
                 </FormItem>
               </Col>
               <Col :span="8">
-                <FormItem field="status" label="服务状态">
-                  <Select v-model="searchFormdata.status" placeholder="请选择服务状态" allow-clear>
-                    <Option :value="1">未上线</Option>
-                    <Option :value="2">已上线</Option>
-                  </Select>
+                <FormItem field="status" label="创建时间">
+                  <RangePicker v-model="searchFormdata.createAt" />
                 </FormItem>
               </Col>
             </Row>
@@ -271,18 +269,11 @@ const handleDeleteInstance = async (uuid: string) => {
 
               <TableColumn title="创建者">
                 <template #cell="{ record }">
-                  {{ record.user.nickname }}
+                  {{ record.user.nickName }}
                 </template>
               </TableColumn>
 
               <TableColumn title="创建时间" data-index="createAt" />
-
-              <TableColumn title="服务上线状态">
-                <template #cell="{ record }">
-                  <Tag v-if="record.status === 2" color="green">已上线</Tag>
-                  <Tag v-else color="red">未上线</Tag>
-                </template>
-              </TableColumn>
 
               <TableColumn title="操作">
                 <template #cell="{ record }">
@@ -293,6 +284,14 @@ const handleDeleteInstance = async (uuid: string) => {
                       @click="() => handleShowInstance(record.uuid)"
                     >
                       详情
+                    </Button>
+
+                    <Button
+                      type="text"
+                      status="normal"
+                      @click="() => handleShowInstance(record.uuid)"
+                    >
+                      添加实例
                     </Button>
 
                     <Popconfirm
