@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { useAxios } from '@vueuse/integrations/useAxios';
-import { Table, TableColumn, Space, Button, Popconfirm } from '@arco-design/web-vue';
+import { Table, TableColumn, Space, Button, Popconfirm, Tag } from '@arco-design/web-vue';
 
 import { instance } from '@/api';
-import { THEME_URL } from '@/api/url';
+import { THEME_APPROVE_URL } from '@/api/url';
 
-import { useTableStore, useDrawerStore } from '../hooks';
+import { useTableStore } from '../hooks';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const { pagination, tableData, isLoading, refreshList } = useTableStore()!;
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const { drawerVisible, selectService } = useDrawerStore()!;
 
 const { isLoading: deleteIsLoading, execute: execute } = useAxios(
-  THEME_URL,
+  THEME_APPROVE_URL,
   {
-    method: 'DELETE',
+    method: 'POST',
   },
   instance,
   { immediate: false },
@@ -26,15 +24,10 @@ const handlePageChange = (page: number) => {
   pagination.current = page;
 };
 
-const handleDeleteService = async (uuid: string) => {
-  await execute({ data: { uuid } });
+const handleDeleteService = async (uuid: string, status: 1 | 2) => {
+  await execute({ data: { uuid, status } });
 
   refreshList();
-};
-
-const handleShowInstance = (uuid: string) => {
-  drawerVisible.value = true;
-  selectService.value = uuid;
 };
 </script>
 
@@ -48,7 +41,7 @@ const handleShowInstance = (uuid: string) => {
     @page-change="handlePageChange"
   >
     <template #columns>
-      <TableColumn title="服务名称" data-index="name" />
+      <TableColumn title="服务名称" data-index="serviceName" />
 
       <TableColumn title="创建者">
         <template #cell="{ record }">
@@ -58,18 +51,29 @@ const handleShowInstance = (uuid: string) => {
 
       <TableColumn title="创建时间" data-index="createAt" />
 
+      <TableColumn title="审批状态">
+        <template #cell="{ record }">
+          <Tag v-if="record.status === 1" color="green">已通过</Tag>
+          <Tag v-else-if="record.status === 2" color="red">未通过</Tag>
+          <Tag v-else>待审批</Tag>
+        </template>
+      </TableColumn>
+
       <TableColumn title="操作">
         <template #cell="{ record }">
           <Space>
-            <Button type="text" status="normal" @click="() => handleShowInstance(record.uuid)">
-              详情
-            </Button>
+            <Popconfirm
+              content="请确认是否通过此上线请求"
+              @ok="() => handleDeleteService(record.uuid, 1)"
+            >
+              <Button type="text" status="normal" :disabled="record.status !== 0">通过</Button>
+            </Popconfirm>
 
             <Popconfirm
-              content="请确认是否删除此数据库连接"
-              @ok="() => handleDeleteService(record.uuid)"
+              content="请确认是否拒绝此上线请求"
+              @ok="() => handleDeleteService(record.uuid, 2)"
             >
-              <Button type="text" status="danger">删除</Button>
+              <Button type="text" status="danger" :disabled="record.status !== 0">拒绝</Button>
             </Popconfirm>
           </Space>
         </template>

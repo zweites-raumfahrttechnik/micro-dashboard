@@ -33,6 +33,15 @@ const service: RouteRecordRaw = {
         locale: '添加实例',
       },
     },
+    {
+      path: 'approve',
+      name: 'ApproveService',
+      component: () => import('@/pages/service/approve/ApproveList.vue'),
+      meta: {
+        requireAuth: true,
+        locale: '上线审批',
+      },
+    },
   ],
   meta: { requireAuth: true, locale: '服务管理', icon: 'icon-common' },
 };
