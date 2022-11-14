@@ -5,8 +5,8 @@ import PageContainer from '@/components/PageContainer.vue';
 
 import { useTableProvideStore } from './hooks';
 
-import ServiceSearchList from './components/ServiceSearchList.vue';
-import ServiceListTable from './components/ServiceListTable.vue';
+import ServiceSearchList from './components/ApproveSearchList.vue';
+import ServiceListTable from './components/ApproveListTable.vue';
 
 useTableProvideStore();
 </script>
