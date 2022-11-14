@@ -4,7 +4,7 @@ import { Result, Space, Button } from '@arco-design/web-vue';
 const router = useRouter();
 
 const handleBack = () => {
-  router.replace({ name: 'Welcome' });
+  router.replace({ name: 'Overview' });
 };
 </script>
 
