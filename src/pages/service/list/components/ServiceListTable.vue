@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAxios } from '@vueuse/integrations/useAxios';
-import { Table, TableColumn, Space, Button, Popconfirm } from '@arco-design/web-vue';
+import { Table, TableColumn, Space, Button, Popconfirm, Link } from '@arco-design/web-vue';
 
 import { instance } from '@/api';
 import { THEME_URL } from '@/api/url';
@@ -48,7 +48,11 @@ const handleShowInstance = (uuid: string) => {
     @page-change="handlePageChange"
   >
     <template #columns>
-      <TableColumn title="服务名称" data-index="name" />
+      <TableColumn title="服务名称">
+        <template #cell="{ record }">
+          <Link @click="() => handleShowInstance(record.uuid)">{{ record.name }}</Link>
+        </template>
+      </TableColumn>
 
       <TableColumn title="创建者">
         <template #cell="{ record }">
@@ -58,13 +62,11 @@ const handleShowInstance = (uuid: string) => {
 
       <TableColumn title="创建时间" data-index="createAt" />
 
+      <TableColumn title="实例个数" data-index="instance" />
+
       <TableColumn title="操作">
         <template #cell="{ record }">
           <Space>
-            <Button type="text" status="normal" @click="() => handleShowInstance(record.uuid)">
-              详情
-            </Button>
-
             <Popconfirm
               content="请确认是否删除此数据库连接"
               @ok="() => handleDeleteService(record.uuid)"
