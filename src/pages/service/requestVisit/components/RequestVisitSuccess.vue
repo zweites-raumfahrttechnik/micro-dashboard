@@ -18,8 +18,8 @@ const handleDetail = () => {
 
 <template>
   <div>
-    <Result status="success" title="添加服务成功">
-      <template #subtitle> 请在服务列表页面查看添加的服务实例 </template>
+    <Result status="success" title="申请访问权限成功">
+      <template #subtitle> 请等待管理员审批 </template>
       <template #extra>
         <Space :size="16">
           <Button @click="handleDetail">查看详情</Button>

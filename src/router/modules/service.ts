@@ -42,6 +42,15 @@ const service: RouteRecordRaw = {
         locale: '上线审批',
       },
     },
+    {
+      path: 'request',
+      name: 'RequestVisit',
+      component: () => import('@/pages/service/requestVisit/RequestVisit.vue'),
+      meta: {
+        requireAuth: true,
+        locale: '申请访问权限',
+      },
+    },
   ],
   meta: { requireAuth: true, locale: '服务管理', icon: 'icon-common' },
 };

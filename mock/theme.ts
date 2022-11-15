@@ -87,6 +87,21 @@ const requests: MockMethod[] = [
       return successResp();
     },
   },
+  {
+    url: '/api/v1/theme/list',
+    method: 'get',
+    response: () => {
+      return successResp({
+        count: 100,
+        data: Array(15)
+          .fill(1)
+          .map(() => ({
+            uuid: Random.id(),
+            name: Random.string(undefined, 5, 10),
+          })),
+      });
+    },
+  },
 ];
 
 export default requests;

@@ -23,3 +23,13 @@ export interface ThemeListData {
   count: number;
   data: ThemeListItem[];
 }
+
+export interface AllThemeListDataItem {
+  uuid: string;
+  name: string;
+}
+
+export interface AllThemeListData {
+  count: number;
+  data: AllThemeListDataItem[];
+}
