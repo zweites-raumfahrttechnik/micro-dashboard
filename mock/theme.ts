@@ -102,6 +102,31 @@ const requests: MockMethod[] = [
       });
     },
   },
+  {
+    url: '/api/v1/visit',
+    method: 'get',
+    response: () => {
+      return successResp({
+        count: 100,
+        data: Array(15)
+          .fill(1)
+          .map(() => ({
+            uuid: Random.id(),
+            name: Random.string(undefined, 5, 10),
+            createAt: Random.time('yyyy-MM-dd hh:mm'),
+            visitor: {
+              name: Random.string(undefined, 4, 8),
+              uuid: Random.id(),
+            },
+            status: Random.pick([0, 1, 2]),
+            user: {
+              nickName: Random.string(undefined, 4, 8),
+              uuid: Random.id(),
+            },
+          })),
+      });
+    },
+  },
 ];
 
 export default requests;
