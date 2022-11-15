@@ -11,6 +11,12 @@ import {
 import { IconUser, IconLock } from '@arco-design/web-vue/es/icon';
 import { useAppModel } from '@/model';
 
+const router = useRouter();
+
+const handleLogin = () => {
+  router.replace({ name: 'Overview' });
+};
+
 const {
   state: { title },
 } = useAppModel();
@@ -27,7 +33,7 @@ const userInfo = reactive({
     <div class="login-form-sub-title">登录 {{ title }}</div>
     <div class="login-form-error-msg"></div>
 
-    <Form :model="userInfo" layout="vertical">
+    <Form :model="userInfo" layout="vertical" @submit="handleLogin">
       <FormItem
         field="username"
         :rules="[{ required: true, message: '用户名不能为空' }]"
@@ -41,7 +47,7 @@ const userInfo = reactive({
         </Input>
       </FormItem>
       <FormItem
-        field="passowrd"
+        field="password"
         :rules="[{ required: true, message: '密码不能为空' }]"
         :validate-trigger="['change', 'blur']"
         hide-label
