@@ -4,8 +4,8 @@ import bannerImg from '@/assets/login/login-banner.png';
 
 const carouselItem = computed(() => [
   {
-    title: 'Buaaica 前端模板',
-    subTitle: '开箱即用，使用Vue3 Setup语法构建',
+    title: 'Powered by BUAA ICA',
+    subTitle: 'Powered by BUAA ICA',
     image: bannerImg,
   },
 ]);
@@ -28,7 +28,7 @@ const carouselItem = computed(() => [
 </template>
 
 <style lang="less" scoped>
-@import '@/style/breakpoint.less';
+@import url('@/style/breakpoint.less');
 
 .banner {
   display: flex;
