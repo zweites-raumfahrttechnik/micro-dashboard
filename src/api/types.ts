@@ -23,3 +23,18 @@ export interface ThemeListData {
   count: number;
   data: ThemeListItem[];
 }
+
+export interface ConfigListItem {
+  uuid: string;
+  dataId: string;
+  type: string;
+  createAt: string;
+  updateAt:string;
+  user: UserInfo;
+}
+
+export interface ConfigListData {
+  count: number;
+  data: ConfigListItem[];
+}
+
