@@ -3,8 +3,8 @@ import { Card } from '@arco-design/web-vue';
 
 import PageContainer from '@/components/PageContainer.vue';
 
-import Form from './components/IssueConfigForm.vue';
-import Success from './components/IssueConfigSuccess.vue';
+import IssueConfigForm from './components/IssueConfigForm.vue';
+import IssueConfigSuccess from './components/IssueConfigSuccess.vue';
 
 // 标记当前应展示的表单页面
 const step = ref(0);
@@ -18,11 +18,10 @@ const changeStep = (idx: number) => {
   <PageContainer>
     <Card class="general-card" :bordered="false">
       <template #title>发布配置</template>
-
       <div class="wrap">
         <KeepAlive>
-          <Form v-if="step === 0" @change-step="changeStep" />
-          <Success v-else-if="step === 1" @change-step="changeStep" />
+          <IssueConfigForm v-if="step === 0" @change-step="changeStep" />
+          <IssueConfigSuccess v-else-if="step === 1" @change-step="changeStep" />
         </KeepAlive>
       </div>
     </Card>

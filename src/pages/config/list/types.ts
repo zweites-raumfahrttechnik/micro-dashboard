@@ -1,7 +1,8 @@
 export interface SearchParams {
   pg: number;
   size: number;
-  name?: string;
+  dataId?: string;
+  type?:string;
   user?: string;
   startAt?: string;
   endAt?: string;

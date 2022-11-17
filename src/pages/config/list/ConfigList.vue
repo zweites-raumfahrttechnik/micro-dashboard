@@ -2,14 +2,13 @@
 import { Card, Row, Col, Divider } from '@arco-design/web-vue';
 
 import PageContainer from '@/components/PageContainer.vue';
-
-import { useTableProvideStore, useDrawerProvideStore } from './hooks';
-
+import { useTableProvideStore, useDrawerProvideStore,useModifyConfigModalProvideStore } from './hooks';
 import ConfigSearchList from './components/ConfigSearchList.vue';
 import ConfigListTable from './components/ConfigListTable.vue';
 
 useTableProvideStore();
 useDrawerProvideStore();
+useModifyConfigModalProvideStore();
 </script>
 
 <template>
@@ -23,7 +22,7 @@ useDrawerProvideStore();
 
       <Row>
         <Col :span="24">
-          <ConfigListTable />
+        <ConfigListTable />
         </Col>
       </Row>
     </Card>

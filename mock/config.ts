@@ -13,11 +13,12 @@ const requests: MockMethod[] = [
           .fill(1)
           .map(() => ({
             uuid: Random.id(),
-            dataId: Random.string(undefined, 5, 10),
+            dataId: Random.title(),
             createAt: Random.time('yyyy-MM-dd hh:mm'),
+            type: Random.pick([1, 2, 3, 4]),
             updateAt: Random.time('yyyy-MM-dd hh:mm'),
             user: {
-              nickName: Random.string(undefined, 4, 8),
+              nickName: Random.name(),
               uuid: Random.id(),
             },
           })),
@@ -48,13 +49,13 @@ const requests: MockMethod[] = [
           .fill(1)
           .map(() => ({
             uuid: Random.id(),
-            dataId: Random.id(),
+            dataId: Random.title(),
             createAt: Random.time('yyyy-MM-dd hh:mm'),
             status: Random.pick([0, 1, 2]),
-            configType:Random.pick([0, 1, 2]),
-            type:Random.pick([0, 1, 2]),
+            configType: Random.pick([0, 1, 2]),
+            type: Random.pick([0, 1, 2]),
             user: {
-              nickName: Random.string(undefined, 4, 8),
+              nickName: Random.name(),
               uuid: Random.id(),
             },
           })),
@@ -62,8 +63,8 @@ const requests: MockMethod[] = [
     },
   },
   {
-    url: '/api/v1/config/approve/delete',
-    method: 'delete',
+    url: '/api/v1/config/approve/publish',
+    method: 'get',
     response: () => {
       return successResp(null);
     },

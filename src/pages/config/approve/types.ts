@@ -1,8 +1,10 @@
 export interface SearchParams {
   pg: number;
   size: number;
-  name?: string;
+  dataId?: string;
   user?: string;
+  type?: number;
+  configType?: number;
   status?: number;
   startAt?: string;
   endAt?: string;

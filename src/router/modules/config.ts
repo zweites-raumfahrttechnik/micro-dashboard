@@ -7,8 +7,8 @@ const config: RouteRecordRaw = {
   component: MAIN_LAYOUT,
   children: [
     {
-      path: 'issue/config',
-      name: 'IssueConfig',
+      path: 'add/config',
+      name: 'AddConfig',
       component: () => import('@/pages/config/issueConfig/IssueConfig.vue'),
       meta: {
         requireAuth: true,

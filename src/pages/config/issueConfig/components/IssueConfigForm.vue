@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Spin, Form, FormItem, Input, Button,Select,Option } from '@arco-design/web-vue';
+import { Spin, Form, FormItem, Input, Button, Select, Option } from '@arco-design/web-vue';
 import { FormInstance } from '@arco-design/web-vue/es/form';
 import { useAxios } from '@vueuse/integrations/useAxios';
 
@@ -13,10 +13,10 @@ const emit = defineEmits<{
 const formRef = ref<FormInstance>();
 
 // 初始化表单初值
-const formData = reactive<{ dataID: string ,content:string,type:string}>({
+const formData = reactive<{ dataID: string; content: string; type: string }>({
   dataID: '',
-  content:'',
-  type:'',
+  content: '',
+  type: '',
 });
 
 const { execute, isLoading } = useAxios(CONFIG_URL, { method: 'POST' }, instance, {
@@ -44,20 +44,18 @@ const handleSubmit = async () => {
 <template>
   <Spin :loading="isLoading">
     <Form ref="formRef" :model="formData" class="form" @submit="handleSubmit">
-      <FormItem field="dataID" label="配置属性" :rules="[{ required: true, message: '必填' }]">
-        <Input v-model="formData.dataID" placeholder="请输入配置属性" />
+      <FormItem field="dataID" label="配置文件名" :rules="[{ required: true, message: '必填' }]">
+        <Input v-model="formData.dataID" placeholder="请输入配置文件名" />
       </FormItem>
       <FormItem field="content" label="配置内容" :rules="[{ required: true, message: '必填' }]">
         <Input v-model="formData.content" placeholder="请输入配置内容" />
       </FormItem>
       <FormItem field="type" label="类型" :rules="[{ required: true, message: '必填' }]">
-        <Select v-model="formData.type" placeholder="请选择配置类型"> 
-          <Option :value="1">1111</Option>
-          <Option :value="2">2222</Option>
-          <Option :value="3">3333</Option>
-          <Option :value="4">4444</Option>
-          <Option :value="5">5555</Option>
-          <Option :value="6">6666</Option>
+        <Select v-model="formData.type" placeholder="请选择配置类型">
+          <Option value="1">配置一</Option>
+          <Option value="2">配置二</Option>
+          <Option value="3">配置三</Option>
+          <Option value="4">配置四</Option>
         </Select>
       </FormItem>
       <FormItem>

@@ -13,7 +13,8 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
 
   // 数据绑定
   const searchFormData = reactive<SearchFormData>({
-    name: '',
+    dataId: '',
+    type: '',
     user: '',
     createAt: [],
   });
@@ -58,8 +59,12 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
   const refreshList = () => {
     const params: SearchParams = { pg: pagination.current, size: pagination.pageSize };
 
-    if (searchFormData.name && searchFormData.name !== '') {
-      params.name = searchFormData.name;
+    if (searchFormData.dataId && searchFormData.dataId !== '') {
+      params.dataId = searchFormData.dataId;
+    }
+
+    if (searchFormData.type && searchFormData.type !== '') {
+      params.type = searchFormData.type;
     }
 
     if (searchFormData.user && searchFormData.user !== '') {
@@ -80,8 +85,18 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
 const [useDrawerProvideStore, useDrawerStore] = createInjectionState(() => {
   const drawerVisible = ref(false);
   const selectService = ref('');
-
   return { drawerVisible, selectService };
 });
 
-export { useTableProvideStore, useTableStore, useDrawerProvideStore, useDrawerStore };
+const [useModifyConfigModalProvideStore,useModifyConfigModalStore]=createInjectionState(() => {
+  const modifyModalVisible = ref(false);
+  const ModifyForm = reactive<{ dataId: string; content: string; type: string }>({
+    dataId: ' ',
+    content: ' ',
+    type: '',
+  });
+  return { modifyModalVisible ,ModifyForm};
+});
+
+
+export { useTableProvideStore, useTableStore, useDrawerProvideStore, useDrawerStore,useModifyConfigModalProvideStore,useModifyConfigModalStore };

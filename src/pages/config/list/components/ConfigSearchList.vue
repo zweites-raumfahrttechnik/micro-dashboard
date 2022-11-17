@@ -9,6 +9,8 @@ import {
   Space,
   Divider,
   Button,
+  Select,
+  Option,
 } from '@arco-design/web-vue';
 
 import { useTableStore } from '../hooks';
@@ -22,7 +24,7 @@ const handleSearch = () => {
 };
 
 // 重置 form 表单
-const handleFromReset = () => {
+const handleFormReset = () => {
   searchFormRef.value?.resetFields();
 
   if (pagination.current !== 1) {
@@ -44,19 +46,29 @@ const handleFromReset = () => {
         label-align="left"
       >
         <Row :gutter="16">
-          <Col :span="8">
-            <FormItem field="name" label="服务名称">
-              <Input v-model="searchFormData.name" placeholder="请输入服务名称" />
+          <Col :span="12">
+            <FormItem field="dataId" label="配置文件名">
+              <Input v-model="searchFormData.dataId" placeholder="请输入配置文件名" />
             </FormItem>
           </Col>
-          <Col :span="8">
+          <Col :span="12">
             <FormItem field="user" label="创建者">
               <Input v-model="searchFormData.user" placeholder="请输入创建者" />
             </FormItem>
           </Col>
-          <Col :span="8">
+          <Col :span="12">
+            <FormItem field="type" label="配置类型">
+              <Select v-model="searchFormData.type" placeholder="请选择配置类型" allow-clear>
+                <Option :value="1">配置一</Option>
+                <Option :value="2">配置二</Option>
+                <Option :value="3">配置三</Option>
+                <Option :value="4">配置四</Option>
+              </Select>
+            </FormItem>
+          </Col>
+          <Col :span="12">
             <FormItem field="createAt" label="创建时间">
-              <RangePicker v-model="searchFormData.createAt" />
+              <RangePicker v-model="searchFormData.createAt" style="width: 100%"></RangePicker>
             </FormItem>
           </Col>
         </Row>
@@ -65,15 +77,15 @@ const handleFromReset = () => {
 
     <Divider style="height: 34px" direction="vertical" />
 
-    <Col flex="195px">
-      <Space :size="18">
+    <Col flex="86px">
+      <Space direction="vertical" align="center" :size="18">
         <Button type="primary" :loading="isLoading" @click="handleSearch">
           <template #icon>
             <IconSearch />
           </template>
           搜索
         </Button>
-        <Button @click="handleFromReset">
+        <Button @click="handleFormReset">
           <template #icon>
             <IconRefresh />
           </template>
