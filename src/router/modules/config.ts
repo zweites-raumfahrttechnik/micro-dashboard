@@ -6,44 +6,35 @@ const config: RouteRecordRaw = {
   name: 'Config',
   component: MAIN_LAYOUT,
   children: [
-    // {
-    //   path: 'add/service',
-    //   name: 'AddService',
-    //   component: () => import('@/pages/service/addService/AddService.vue'),
-    //   meta: {
-    //     requireAuth: true,
-    //     locale: '添加服务',
-    //   },
-    // },
+    {
+      path: 'add/config',
+      name: 'AddConfig',
+      component: () => import('@/pages/config/issueConfig/IssueConfig.vue'),
+      meta: {
+        requireAuth: true,
+        locale: '发布配置',
+      },
+    },
     {
       path: 'list',
       name: 'ConfigList',
-      component: () => import('@/pages/configuration/ConfigList.vue'),
+      component: () => import('@/pages/config/list/ConfigList.vue'),
       meta: {
         requireAuth: true,
         locale: '配置列表',
       },
     },
-    // {
-    //   path: 'add/instance',
-    //   name: 'AddInstance',
-    //   component: () => import('@/pages/service/addInstance/AddInstance.vue'),
-    //   meta: {
-    //     requireAuth: true,
-    //     locale: '添加实例',
-    //   },
-    // },
-    // {
-    //   path: 'approve',
-    //   name: 'ApproveService',
-    //   component: () => import('@/pages/service/approve/ApproveList.vue'),
-    //   meta: {
-    //     requireAuth: true,
-    //     locale: '上线审批',
-    //   },
-    // },
+    {
+      path: 'approve',
+      name: 'ApproveConfig',
+      component: () => import('@/pages/config/approve/ApproveList.vue'),
+      meta: {
+        requireAuth: true,
+        locale: '上线审批',
+      },
+    },
   ],
-  meta: { requireAuth: true, locale: '配置管理', icon: 'icon-common', order: 2 },
+  meta: { requireAuth: true, locale: '配置管理', icon: 'icon-common' },
 };
 
 export default config;
