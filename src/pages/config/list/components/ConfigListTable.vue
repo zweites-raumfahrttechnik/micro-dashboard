@@ -30,6 +30,7 @@ const handleDeleteConfig = async (uuid: string) => {
 
 const handleModifyConfigModal = (record: any) => {
   ModifyForm.dataId = record.dataId;
+  ModifyForm.content="";
   ModifyForm.type = String(record.type);
   modifyModalVisible.value = true;
 };
