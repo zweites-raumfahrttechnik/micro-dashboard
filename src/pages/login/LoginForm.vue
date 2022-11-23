@@ -7,24 +7,37 @@ import {
   Space,
   Button,
   Checkbox,
+  Message,
 } from '@arco-design/web-vue';
 import { IconUser, IconLock } from '@arco-design/web-vue/es/icon';
-import { useAppModel } from '@/model';
+import { useAppModel, useUserModel } from '@/model';
 
 const router = useRouter();
-
-const handleLogin = () => {
-  router.replace({ name: 'Overview' });
-};
 
 const {
   state: { title },
 } = useAppModel();
 
+const { setUser } = useUserModel();
+
 const userInfo = reactive({
   username: '',
   password: '',
 });
+
+const handleLogin = () => {
+  if (
+    userInfo.username !== 'user1' &&
+    userInfo.username !== 'user2' &&
+    userInfo.username !== 'admin'
+  ) {
+    Message.error('用户名错误');
+    return;
+  }
+
+  setUser(userInfo.username, userInfo.username === 'admin' ? 'admin' : 'user');
+  router.replace({ name: 'Overview' });
+};
 </script>
 
 <template>
