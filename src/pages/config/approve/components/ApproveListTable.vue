@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { useAxios } from '@vueuse/integrations/useAxios';
-import {
-  Table,
-  TableColumn,
-  Space,
-  Button,
-  Popconfirm,
-  Tag,
-} from '@arco-design/web-vue';
+import { Table, TableColumn, Space, Button, Popconfirm, Tag } from '@arco-design/web-vue';
 
 import { instance } from '@/api';
 import { CONFIG_APPROVE_PUBLISH_URL, CONFIG_APPROVE_DELETE_URL } from '@/api/url';
@@ -53,8 +46,14 @@ const handlePubulishConfig = async (uuid: string, status: 1 | 2) => {
 </script>
 
 <template>
-  <Table row-key="uuid" :bordered="false" :pagination="pagination" :data="tableData"
-    :loading="isLoading || deleteIsLoading" @page-change="handlePageChange">
+  <Table
+    row-key="uuid"
+    :bordered="false"
+    :pagination="pagination"
+    :data="tableData"
+    :loading="isLoading || deleteIsLoading"
+    @page-change="handlePageChange"
+  >
     <template #columns>
       <TableColumn title="配置文件名" data-index="dataId" />
 
@@ -67,28 +66,28 @@ const handlePubulishConfig = async (uuid: string, status: 1 | 2) => {
 
       <TableColumn title="审批状态">
         <template #cell="{ record }">
-          <Tag v-if="record.status === 1" color="green"><template #icon>
-              <IconCheckCircleFill />
-            </template><span>已通过</span></Tag>
-          <Tag v-else-if="record.status === 2" color="red"><template #icon>
-              <IconCloseCircleFill />
-            </template><span>未通过</span></Tag>
-          <Tag v-else><template #icon>
-              <IconExclamationCircleFill />
-            </template><span>待审批</span></Tag>
+          <Tag v-if="record.status === 1" color="green"
+            ><template #icon> <IconCheckCircleFill /> </template><span>已通过</span></Tag
+          >
+          <Tag v-else-if="record.status === 2" color="red"
+            ><template #icon> <IconCloseCircleFill /> </template><span>未通过</span></Tag
+          >
+          <Tag v-else
+            ><template #icon> <IconExclamationCircleFill /> </template><span>待审批</span></Tag
+          >
         </template>
       </TableColumn>
       <TableColumn title="配置类型">
         <template #cell="{ record }">
-          <Tag v-if="record.configType === 1" color="green"><template #icon>
-              <IconCheckCircleFill />
-            </template><span>已配置</span></Tag>
-          <Tag v-else-if="record.configType === 2" color="orange"><template #icon>
-              <IconExclamationCircleFill />
-            </template><span>未配置</span></Tag>
-          <Tag v-else><template #icon>
-              <IconExclamationCircleFill />
-            </template><span>待配置</span></Tag>
+          <Tag v-if="record.configType === 1" color="green"
+            ><template #icon> <IconCheckCircleFill /> </template><span>已配置</span></Tag
+          >
+          <Tag v-else-if="record.configType === 2" color="orange"
+            ><template #icon> <IconExclamationCircleFill /> </template><span>未配置</span></Tag
+          >
+          <Tag v-else
+            ><template #icon> <IconExclamationCircleFill /> </template><span>待配置</span></Tag
+          >
         </template>
       </TableColumn>
       <TableColumn title="类型">
@@ -101,26 +100,44 @@ const handlePubulishConfig = async (uuid: string, status: 1 | 2) => {
       <TableColumn title="操作">
         <template #cell="{ record }">
           <Space v-if="record.type === 0">
-            <Popconfirm content="请确认是否通过此上线请求" @ok="() => handlePubulishConfig(record.uuid, 1)">
+            <Popconfirm
+              content="请确认是否通过此上线请求"
+              @ok="() => handlePubulishConfig(record.uuid, 1)"
+            >
               <Button type="text" status="normal" :disabled="record.status !== 0">同意上线</Button>
             </Popconfirm>
-            <Popconfirm content="请确认是否拒绝此上线请求" @ok="() => handlePubulishConfig(record.uuid, 2)">
+            <Popconfirm
+              content="请确认是否拒绝此上线请求"
+              @ok="() => handlePubulishConfig(record.uuid, 2)"
+            >
               <Button type="text" status="danger" :disabled="record.status !== 0">拒绝上线</Button>
             </Popconfirm>
           </Space>
           <Space v-if="record.type === 1">
-            <Popconfirm content="请确认是否通过此修改请求" @ok="() => handlePubulishConfig(record.uuid, 1)">
+            <Popconfirm
+              content="请确认是否通过此修改请求"
+              @ok="() => handlePubulishConfig(record.uuid, 1)"
+            >
               <Button type="text" status="normal" :disabled="record.status !== 0">同意修改</Button>
             </Popconfirm>
-            <Popconfirm content="请确认是否拒绝此修改请求" @ok="() => handlePubulishConfig(record.uuid, 2)">
+            <Popconfirm
+              content="请确认是否拒绝此修改请求"
+              @ok="() => handlePubulishConfig(record.uuid, 2)"
+            >
               <Button type="text" status="danger" :disabled="record.status !== 0">拒绝修改</Button>
             </Popconfirm>
           </Space>
           <Space v-if="record.type === 2">
-            <Popconfirm content="请确认是否通过此删除请求" @ok="() => handleDeleteConfig(record.uuid, 1)">
+            <Popconfirm
+              content="请确认是否通过此删除请求"
+              @ok="() => handleDeleteConfig(record.uuid, 1)"
+            >
               <Button type="text" status="normal" :disabled="record.status !== 0">同意删除</Button>
             </Popconfirm>
-            <Popconfirm content="请确认是否拒绝此删除请求" @ok="() => handleDeleteConfig(record.uuid, 2)">
+            <Popconfirm
+              content="请确认是否拒绝此删除请求"
+              @ok="() => handleDeleteConfig(record.uuid, 2)"
+            >
               <Button type="text" status="danger" :disabled="record.status !== 0">拒绝删除</Button>
             </Popconfirm>
           </Space>
