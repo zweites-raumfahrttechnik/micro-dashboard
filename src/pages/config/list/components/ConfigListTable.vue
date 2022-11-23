@@ -30,6 +30,7 @@ const handleDeleteConfig = async (uuid: string) => {
 
 const handleModifyConfigModal = (record: any) => {
   ModifyForm.dataId = record.dataId;
+  ModifyForm.content = '';
   ModifyForm.type = String(record.type);
   modifyModalVisible.value = true;
 };
@@ -72,9 +73,9 @@ const handleModifyConfigModal = (record: any) => {
             >
               <Button type="text" status="danger">删除</Button>
             </Popconfirm>
-            <Button @click="handleModifyConfigModal(record)" type="text" status="warning"
-              >修改</Button
-            >
+            <Button type="text" status="warning" @click="handleModifyConfigModal(record)">
+              修改
+            </Button>
           </Space>
         </template>
       </TableColumn>
