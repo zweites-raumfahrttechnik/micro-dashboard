@@ -15,7 +15,6 @@ import {
   IconFullscreen,
   IconFullscreenExit,
   IconSettings,
-  IconUser,
   IconExport,
 } from '@arco-design/web-vue/es/icon';
 import { useAppModel, useUserModel } from '@/model';
