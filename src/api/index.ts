@@ -18,7 +18,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(req => {
   const { token } = useUserModel();
-  req.headers = { ...req.headers, Authorization: token.value || '' };
+  req.headers = { ...req.headers, Authorization: `ASI ${token.value}` || 'ASI ' };
 
   return req;
 });
