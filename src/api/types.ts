@@ -23,3 +23,10 @@ export interface ThemeListData {
   count: number;
   data: ThemeListItem[];
 }
+export interface TemplateListItem {
+  templateName: string;
+}
+
+export interface TemplateListData {
+  data: TemplateListItem[];
+}
