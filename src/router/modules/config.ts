@@ -13,6 +13,7 @@ const config: RouteRecordRaw = {
       meta: {
         requireAuth: true,
         locale: '发布配置',
+        roles: ['user'],
       },
     },
     {
@@ -31,6 +32,7 @@ const config: RouteRecordRaw = {
       meta: {
         requireAuth: true,
         locale: '上线审批',
+        roles: ['admin'],
       },
     },
   ],

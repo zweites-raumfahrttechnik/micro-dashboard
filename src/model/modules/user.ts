@@ -9,7 +9,11 @@ const useUserModel = createGlobalState(() => {
     user.value.role = role;
   };
 
-  return { setUser, token, role };
+  const clearUser = () => {
+    user.value = {};
+  };
+
+  return { setUser, clearUser, token, role };
 });
 
 export { useUserModel };
