@@ -25,6 +25,7 @@ export interface ThemeListData {
 }
 export interface TemplateListItem {
   templateName: string;
+  status:number;
 }
 
 export interface TemplateListData {

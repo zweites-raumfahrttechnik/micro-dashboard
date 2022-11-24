@@ -13,11 +13,13 @@ import {
   Checkbox,
   CardGrid,
   CheckboxGroup,
+  Option,
 } from '@arco-design/web-vue';
 import { reactive, ref } from 'vue';
 
+import { useDrawerStore } from './hooks';
 
-
+const { drawerVisible } = useDrawerStore()!;
 //表单数据
 const FormData = reactive({
   Group: '',
@@ -26,9 +28,10 @@ const FormData = reactive({
   Describe: '',
   package: '',
 });
-const handleSubmit=()=>{
-  
-}
+
+const handleSubmit = () => {
+  drawerVisible.value = true;
+};
 </script>
 
 <template>
@@ -45,9 +48,17 @@ const handleSubmit=()=>{
     </CheckboxGroup>
   </Descriptions>
   <Descriptions title="Project Metadata" size="large">
-    <Form :model="FormData" class="form" label-align="left" layout="vertical"  @submit="handleSubmit">
-      <FormItem field="Group" label="Group" :rules="[{ required: true, message: '必填' }]">
-        <Select></Select>
+    <Form
+      :model="FormData"
+      class="form"
+      label-align="left"
+      layout="vertical"
+      @submit="handleSubmit"
+    >
+      <FormItem field="Group" label="Group">
+        <Select>
+          <Option>1</Option>
+        </Select>
       </FormItem>
 
       <FormItem field="Artifact" label="Artifact" :rules="[{ required: true, message: '必填' }]">
@@ -64,7 +75,7 @@ const handleSubmit=()=>{
         <Input v-model="FormData.package" placeholder="Please enter something" />
       </FormItem>
       <FormItem>
-        <Button html-type="submit" type="primary">提交</Button>
+        <Button html-type="submit" type="primary">编辑</Button>
       </FormItem>
     </Form>
   </Descriptions>

@@ -12,6 +12,7 @@ const requests: MockMethod[] = [
           .fill(1)
           .map(() => ({
             templateName: Random.string(undefined, 8, 17),
+            status:1,
           })),
       });
     },

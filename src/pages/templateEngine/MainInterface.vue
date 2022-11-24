@@ -16,6 +16,7 @@ import {
   Pagination,
   InputSearch,
 } from '@arco-design/web-vue';
+
 import PageContainer from '@/components/PageContainer.vue';
 import LeftBox from './components/LeftBox.vue';
 import RightBox from './components/RightBox.vue';
@@ -23,6 +24,8 @@ import RightBox from './components/RightBox.vue';
 import { useTableProvideStore } from './components/hooks';
 
 useTableProvideStore();
+useDrawerProvideStore();
+
 </script>
 
 <template>
