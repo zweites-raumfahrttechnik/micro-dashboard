@@ -26,13 +26,17 @@
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.38.1",
+    "@codemirror/lang-cpp": "^6.0.2",
+    "@codemirror/lang-java": "^6.0.1",
     "@types/nprogress": "^0.2.0",
     "@vueuse/core": "^9.4.0",
     "@vueuse/integrations": "^9.4.0",
     "axios": "^0.27.2",
+    "codemirror": "^6.0.1",
     "nprogress": "^0.2.0",
     "qs": "^6.11.0",
     "vue": "^3.2.41",
+    "vue-codemirror": "^6.1.1",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

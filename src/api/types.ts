@@ -23,9 +23,10 @@ export interface ThemeListData {
   count: number;
   data: ThemeListItem[];
 }
+
 export interface TemplateListItem {
   templateName: string;
-  status:number;
+  status: number;
 }
 
 export interface TemplateListData {

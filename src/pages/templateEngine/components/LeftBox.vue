@@ -1,84 +1,97 @@
 <script setup lang="ts">
 import {
-  Card,
-  Row,
-  Col,
-  Select,
   Button,
   Descriptions,
-  Space,
   FormItem,
   Form,
   Input,
-  Checkbox,
-  CardGrid,
-  CheckboxGroup,
-  Option,
+  Radio,
+  RadioGroup,
 } from '@arco-design/web-vue';
-import { reactive, ref } from 'vue';
 
-import { useDrawerStore } from './hooks';
+import { useTableStore } from '../hooks';
 
-const { drawerVisible } = useDrawerStore()!;
-//表单数据
-const FormData = reactive({
-  Group: '',
-  Artifact: '',
-  Name: '',
-  Describe: '',
-  package: '',
-});
+const { FormData, selectedKeys } = useTableStore()!;
 
 const handleSubmit = () => {
-  drawerVisible.value = true;
+  FormData.selectedKeys = selectedKeys;
+
+  //上传元数据
+  console.log(
+    '上传元数据' +
+      '\n' +
+      FormData.Language +
+      '\n' +
+      FormData.Request +
+      '\n' +
+      FormData.Group +
+      '\n' +
+      FormData.Artifact +
+      '\n' +
+      FormData.Name +
+      '\n' +
+      FormData.Describe +
+      '\n' +
+      FormData.package,
+    '\n' + FormData.selectedKeys,
+  );
 };
 </script>
 
 <template>
-  <Descriptions title="Lanuage" size="large">
-    <CheckboxGroup>
-      <Checkbox value="1">JAVA</Checkbox>
-       <Checkbox value="2">C++</Checkbox>
-    </CheckboxGroup>
-  </Descriptions>
-  <Descriptions title="Request" size="large">
-    <CheckboxGroup>
-      <Checkbox value="3">resultful</Checkbox>
-      <Checkbox value="4">gRPC</Checkbox>
-    </CheckboxGroup>
-  </Descriptions>
-  <Descriptions title="Project Metadata" size="large">
-    <Form
-      :model="FormData"
-      class="form"
-      label-align="left"
-      layout="vertical"
-      @submit="handleSubmit"
-    >
-      <FormItem field="Group" label="Group">
-        <Select>
-          <Option>1</Option>
-        </Select>
+  <Descriptions title="项目元数据" size="large">
+    <Form :model="FormData" class="form" layout="vertical" @submit="handleSubmit">
+      <FormItem field="Language" label="编程语言">
+        <RadioGroup v-model="FormData.Language">
+          <Radio value="1">JAVA</Radio>
+          <Radio value="2">C++</Radio>
+        </RadioGroup>
+      </FormItem>
+      <FormItem field="Request" label="请求协议">
+        <RadioGroup v-model="FormData.Request">
+          <Radio value="1">resultful</Radio>
+          <Radio value="2">gRPC</Radio>
+        </RadioGroup>
+      </FormItem>
+      <FormItem field="Group" label="组织(Group)" :rules="[{ required: true, message: '必填' }]">
+        <Input v-model="FormData.Group" placeholder="Please enter something" />
       </FormItem>
 
-      <FormItem field="Artifact" label="Artifact" :rules="[{ required: true, message: '必填' }]">
+      <FormItem
+        field="Artifact"
+        label="项目名称(Artifact)"
+        :rules="[{ required: true, message: '必填' }]"
+      >
         <Input v-model="FormData.Artifact" placeholder="Please enter something" />
       </FormItem>
 
-      <FormItem field="Name" label="Name" :rules="[{ required: true, message: '必填' }]">
+      <FormItem field="Name" label="类名(Name)" :rules="[{ required: true, message: '必填' }]">
         <Input v-model="FormData.Name" placeholder="Please enter something" />
       </FormItem>
-      <FormItem field="Describe" label="Describe">
+      <FormItem
+        field="Describe"
+        label="描述(Describe)"
+        :rules="[{ required: true, message: '必填' }]"
+      >
         <Input v-model="FormData.Describe" placeholder="Please enter something" />
       </FormItem>
-      <FormItem field="package" label="package name">
+      <FormItem
+        field="package"
+        label="包名(package name)"
+        :rules="[{ required: true, message: '必填' }]"
+      >
         <Input v-model="FormData.package" placeholder="Please enter something" />
       </FormItem>
       <FormItem>
-        <Button html-type="submit" type="primary">编辑</Button>
+        <Button html-type="submit" type="primary" class="button">提交</Button>
       </FormItem>
     </Form>
   </Descriptions>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.button {
+  position: relative;
+  left: 90%;
+}
+</style>

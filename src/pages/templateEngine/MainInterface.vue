@@ -1,31 +1,16 @@
 <script setup lang="ts">
-import {
-  Card,
-  Row,
-  Col,
-  Divider,
-  Tabs,
-  TabPane,
-  Result,
-  CardMeta,
-  TypographyText,
-  Tag,
-  Button,
-  Descriptions,
-  Popconfirm,
-  Pagination,
-  InputSearch,
-} from '@arco-design/web-vue';
+import { Card, Row, Col, Button, Divider, Space } from '@arco-design/web-vue';
 
 import PageContainer from '@/components/PageContainer.vue';
 import LeftBox from './components/LeftBox.vue';
 import RightBox from './components/RightBox.vue';
+import CodeMirrorDrawer from './components/CodeMirrorDrawer.vue';
+import ExploerButton from './components/ExploerButton.vue';
 
-import { useTableProvideStore } from './components/hooks';
+import { useTableProvideStore, useDrawerProvideStore } from './hooks';
 
 useTableProvideStore();
 useDrawerProvideStore();
-
 </script>
 
 <template>
@@ -45,9 +30,16 @@ useDrawerProvideStore();
           <RightBox />
         </Col>
       </Row>
+
+      <Row>
+        <Col :span="4" :offset="20">
+          <ExploerButton> </ExploerButton>
+        </Col>
+      </Row>
     </Card>
+
+    <CodeMirrorDrawer></CodeMirrorDrawer>
   </PageContainer>
-  
 </template>
 <style lang="less" scoped>
 .card-container {
