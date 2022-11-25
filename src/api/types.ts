@@ -24,6 +24,20 @@ export interface ThemeListData {
   data: ThemeListItem[];
 }
 
+export interface ConfigListItem {
+  uuid: string;
+  dataId: string;
+  type: string;
+  createAt: string;
+  updateAt: string;
+  user: UserInfo;
+}
+
+export interface ConfigListData {
+  count: number;
+  data: ConfigListItem[];
+}
+
 export interface AllThemeListDataItem {
   uuid: string;
   name: string;
