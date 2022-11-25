@@ -36,7 +36,7 @@ const handleDelete = (item: any) => {
             <Button
               :style="{ marginLeft: '10px' }"
               shape="circle"
-              status="success"
+              status="danger"
               @click="handleDelete(item)"
             >
               <template #icon>
