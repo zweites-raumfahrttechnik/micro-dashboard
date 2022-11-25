@@ -13,6 +13,7 @@ const config: RouteRecordRaw = {
       meta: {
         requireAuth: true,
         locale: '发布配置',
+        roles: ['user'],
       },
     },
     {
@@ -31,10 +32,11 @@ const config: RouteRecordRaw = {
       meta: {
         requireAuth: true,
         locale: '上线审批',
+        roles: ['admin'],
       },
     },
   ],
-  meta: { requireAuth: true, locale: '配置管理', icon: 'icon-common' },
+  meta: { requireAuth: true, locale: '配置管理', icon: 'icon-common', order: 3 },
 };
 
 export default config;

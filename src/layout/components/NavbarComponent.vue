@@ -15,12 +15,14 @@ import {
   IconFullscreen,
   IconFullscreenExit,
   IconSettings,
-  IconUser,
   IconExport,
 } from '@arco-design/web-vue/es/icon';
-import { useAppModel } from '@/model';
+import { useAppModel, useUserModel } from '@/model';
+
+const router = useRouter();
 
 const { state, toggleTheme: appToggleTheme, toggleSettingVisible } = useAppModel();
+const { clearUser } = useUserModel();
 
 const toggleDrawerMenu = inject('toggleDrawerMenu') as () => void;
 
@@ -41,6 +43,11 @@ const handleToggleTheme = () => {
 };
 
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
+
+const handleLogout = () => {
+  clearUser();
+  router.replace({ name: 'Login' });
+};
 </script>
 
 <template>
@@ -104,7 +111,7 @@ const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
             />
           </Avatar>
           <template #content>
-            <Doption>
+            <!-- <Doption>
               <Space>
                 <IconUser />
                 <span>用户中心</span>
@@ -116,9 +123,9 @@ const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
                 <IconSettings />
                 <span>用户设置</span>
               </Space>
-            </Doption>
+            </Doption> -->
 
-            <Doption>
+            <Doption @click="handleLogout">
               <Space>
                 <IconExport />
                 <span>退出登录</span>

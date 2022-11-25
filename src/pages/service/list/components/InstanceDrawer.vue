@@ -45,8 +45,8 @@ const { isLoading: deleteLoading, execute: deleteExecute } = useAxios(
 
 watch(
   () => selectService.value,
-  () => {
-    execute();
+  val => {
+    execute({ params: { uuid: val } });
   },
 );
 

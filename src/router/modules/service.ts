@@ -13,6 +13,7 @@ const service: RouteRecordRaw = {
       meta: {
         requireAuth: true,
         locale: '添加服务',
+        roles: ['user'],
       },
     },
     {
@@ -31,6 +32,7 @@ const service: RouteRecordRaw = {
       meta: {
         requireAuth: true,
         locale: '添加实例',
+        roles: ['user'],
       },
     },
     {
@@ -40,6 +42,7 @@ const service: RouteRecordRaw = {
       meta: {
         requireAuth: true,
         locale: '上线审批',
+        roles: ['admin'],
       },
     },
     {
@@ -49,6 +52,7 @@ const service: RouteRecordRaw = {
       meta: {
         requireAuth: true,
         locale: '申请访问权限',
+        roles: ['user'],
       },
     },
     {
@@ -58,6 +62,7 @@ const service: RouteRecordRaw = {
       meta: {
         requireAuth: true,
         locale: '访问权限审批',
+        roles: ['admin'],
       },
     },
   ],

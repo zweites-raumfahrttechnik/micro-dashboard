@@ -2,7 +2,11 @@
 import { Card, Row, Col, Divider } from '@arco-design/web-vue';
 
 import PageContainer from '@/components/PageContainer.vue';
-import { useTableProvideStore, useDrawerProvideStore,useModifyConfigModalProvideStore } from './hooks';
+import {
+  useTableProvideStore,
+  useDrawerProvideStore,
+  useModifyConfigModalProvideStore,
+} from './hooks';
 import ConfigSearchList from './components/ConfigSearchList.vue';
 import ConfigListTable from './components/ConfigListTable.vue';
 
@@ -22,7 +26,7 @@ useModifyConfigModalProvideStore();
 
       <Row>
         <Col :span="24">
-        <ConfigListTable />
+          <ConfigListTable />
         </Col>
       </Row>
     </Card>
