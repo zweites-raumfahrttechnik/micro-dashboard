@@ -18,8 +18,8 @@ const handleDetail = () => {
 
 <template>
   <div>
-    <Result status="success" title="添加服务成功">
-      <template #subtitle> 请在服务列表页面查看添加的数据库连接 </template>
+    <Result status="success" title="添加实例成功">
+      <template #subtitle> 请在服务列表页面查看添加的服务实例 </template>
       <template #extra>
         <Space :size="16">
           <Button @click="handleDetail">查看详情</Button>
