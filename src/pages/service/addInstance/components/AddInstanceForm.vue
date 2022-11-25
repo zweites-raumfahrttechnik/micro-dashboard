@@ -56,7 +56,7 @@ const handleSubmit = async () => {
 <template>
   <Spin :loading="isLoading">
     <Form ref="formRef" :model="formData" class="form" @submit="handleSubmit">
-      <FormItem field="uuid" label="实例IP地址" :rules="[{ required: true, message: '必填' }]">
+      <FormItem field="uuid" label="服务名称" :rules="[{ required: true, message: '必填' }]">
         <Select
           v-model="formData.uuid"
           :loading="listLoading"
