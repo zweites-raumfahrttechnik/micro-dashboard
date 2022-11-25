@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Table, TableColumn, Tag } from '@arco-design/web-vue';
+import { Table, TableColumn } from '@arco-design/web-vue';
 
 import { useTableStore } from '../hooks';
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useAxios } from '@vueuse/integrations/useAxios';
 import { Drawer, Tree, Row, Col, Card, Divider } from '@arco-design/web-vue';
 
 import { useDrawerStore } from '../hooks';

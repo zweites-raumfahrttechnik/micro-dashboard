@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Card, Row, Col, Button, Divider, Space } from '@arco-design/web-vue';
+import { Card, Row, Col, Divider } from '@arco-design/web-vue';
 
 import PageContainer from '@/components/PageContainer.vue';
 import LeftBox from './components/LeftBox.vue';

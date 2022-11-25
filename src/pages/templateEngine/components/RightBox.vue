@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Card, Space, Button, Modal, List, ListItem, ListItemMeta } from '@arco-design/web-vue';
 import { reactive, ref } from 'vue';
-import ModalTable from './Modal.vue';
+import ModalTable from './DependencyModal.vue';
 
 import { useTableStore } from '../hooks';
 

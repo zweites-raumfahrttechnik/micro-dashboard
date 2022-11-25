@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { Card, Row, Col, Button, Divider, Space } from '@arco-design/web-vue';
-
-import PageContainer from '@/components/PageContainer.vue';
+import { Button, Space } from '@arco-design/web-vue';
 
 import { useDrawerStore } from '../hooks';
 const { drawerVisible } = useDrawerStore()!;
