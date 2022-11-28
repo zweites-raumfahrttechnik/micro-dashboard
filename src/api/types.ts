@@ -38,3 +38,26 @@ export interface ConfigListData {
   data: ConfigListItem[];
 }
 
+export interface ChartValue {
+  count: number;
+  growth: number;
+  value: number[];
+}
+
+export interface ConcurrentChartValue {
+  xAxis: string[];
+  concurrent: number[];
+  through: number[];
+}
+export interface GetListDataItem {
+  uuid: string;
+  username: string;
+  ip: string;
+  port: number;
+  type: number;
+}
+
+export interface GetListData {
+  count: number;
+  data: GetListDataItem[];
+}
