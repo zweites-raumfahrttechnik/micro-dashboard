@@ -76,3 +76,12 @@ export interface ServiceDetail {
   instance: ServiceDetailInstance;
   visited: ServiceDetailVisited;
 }
+
+export interface TemplateListItem {
+  templateName: string;
+  status: number;
+}
+
+export interface TemplateListData {
+  data: TemplateListItem[];
+}

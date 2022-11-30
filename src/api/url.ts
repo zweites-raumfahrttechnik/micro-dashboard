@@ -15,3 +15,6 @@ export const CONFIG_APPROVE_PUBLISH_URL = `${v1}/config/approve/publish`;
 export const CONFIG_APPROVE_DELETE_URL = `${v1}/config/approve/delete`;
 export const VISIT_URL = `${v1}/visit`;
 export const VISIT_APPROVE_URL = `${v1}/visit/approve`;
+
+//模板引擎的假API
+export const TEMPLATE_LIST_URL = `${v1}/template/list`;
