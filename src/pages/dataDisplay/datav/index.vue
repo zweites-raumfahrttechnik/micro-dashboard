@@ -1,25 +1,29 @@
+
+<script lang="ts" setup>
+import {
+  BorderBox1 as DvBorderBox1,
+  BorderBox2 as DvBorderBox2,
+  BorderBox3 as DvBorderBox3,
+  BorderBox4 as DvBorderBox4,
+} from '@kjgl77/datav-vue3';
+import LeftChart1 from './components/LeftChart1.vue';
+import LeftChart2 from './components/LeftChart2.vue';
+import LeftChart3 from './components/LeftChart3.vue';
+import CenterCmp from './components/CenterCmp.vue';
+import RightChart1 from './components/RightChart1.vue';
+import RightChart2 from './components/RightChart2.vue';
+import BottomCharts from './components/BottomCharts.vue';
+</script>
+
 <template>
   <div id="data-view">
-    <dv-full-screen-container>
       <div class="main-header">
         <div class="mh-left">
-          技术支持:<a href="https://github.com/Monica-29vir/micro-dashboard" target="_blank"
-            >https://github.com/Monica-29vir/micro-dashboard</a
-          >
+         
         </div>
         <div class="mh-middle">软件服务化集成平台</div>
         <div class="mh-right">
-          <DvBorderBox2
-            style="
-              width: 120px;
-              height: 50px;
-              line-height: 50px;
-              text-align: center;
-              margin-left: 200px;
-            "
-          >
-            综合管理台
-          </DvBorderBox2>
+         
         </div>
       </div>
 
@@ -52,31 +56,18 @@
           </DvBorderBox4>
         </div>
       </DvBorderBox1>
-    </dv-full-screen-container>
   </div>
 </template>
 
-<script lang="ts" setup>
-import {
-  BorderBox1 as DvBorderBox1,
-  BorderBox2 as DvBorderBox2,
-  BorderBox3 as DvBorderBox3,
-  BorderBox4 as DvBorderBox4,
-} from '@kjgl77/datav-vue3';
-import LeftChart1 from './LeftChart1.vue';
-import LeftChart2 from './LeftChart2.vue';
-import LeftChart3 from './LeftChart3.vue';
-import CenterCmp from './CenterCmp.vue';
-import RightChart1 from './RightChart1.vue';
-import RightChart2 from './RightChart2.vue';
-import BottomCharts from './BottomCharts.vue';
-</script>
+
 
 <style lang="less">
 #data-view {
   width: 100%;
   height: 100%;
-  background-color: #030409;
+  //background-color: #030409;
+  background-image: url('./img/bg.png');
+  background-size: 100% 100%;
   color: #fff;
 
   #dv-full-screen-container {

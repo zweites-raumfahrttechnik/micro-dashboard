@@ -1,3 +1,38 @@
+
+<script lang="ts" setup>
+import { Decoration1,ActiveRingChart } from '@kjgl77/datav-vue3';
+import { reactive } from 'vue';
+const state = reactive({
+  config: {
+    data: [
+      {
+        name: '用户与服务',
+        value: 1315,
+      },
+      {
+        name: '服务与服务',
+        value: 415,
+      },
+      {
+        name: '服务与配置',
+        value: 90,
+      },
+      {
+        name: '其他',
+        value: 317,
+      },
+    ],
+    color: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
+    lineWidth: 30,
+    radius: '75%',
+    activeRadius: '80%',
+  },
+
+  labelConfig: {
+    data: ['用户与服务', '服务与服务', '服务与配置', '其他'],
+  },
+});
+</script>
 <template>
   <div class="center-cmp">
     <div class="cc-header">
@@ -31,39 +66,6 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { Decoration1,ActiveRingChart } from '@kjgl77/datav-vue3';
-const state = reactive({
-  config: {
-    data: [
-      {
-        name: '用户与服务',
-        value: 1315,
-      },
-      {
-        name: '服务与服务',
-        value: 415,
-      },
-      {
-        name: '服务与配置',
-        value: 90,
-      },
-      {
-        name: '其他',
-        value: 317,
-      },
-    ],
-    color: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
-    lineWidth: 30,
-    radius: '75%',
-    activeRadius: '80%',
-  },
-
-  labelConfig: {
-    data: ['用户与服务', '服务与服务', '服务与配置', '其他'],
-  },
-});
-</script>
 
 <style lang="less">
 .center-cmp {

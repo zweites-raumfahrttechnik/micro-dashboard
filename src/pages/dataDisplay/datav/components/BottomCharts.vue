@@ -1,38 +1,6 @@
-<template>
-  <div class="bottom-charts">
-    <div class="bc-chart-item">
-      <div class="bcci-header">监听配置</div>
-      <ActiveRingChart :config="state.config1" />
-      <Label-Tag :config="state.labelConfig" />
-    </div>
-    <decoration-2 class="decoration-1" :reverse="true" style="width: 5px" />
-
-    <div class="bc-chart-item">
-      <div class="bcci-header">注册接口配置</div>
-      <ActiveRingChart :config="state.config2" />
-      <Label-Tag :config="state.labelConfig" />
-    </div>
-
-    <decoration-2 class="decoration-2" :reverse="true" style="width: 5px" />
-
-    <div class="bc-chart-item">
-      <div class="bcci-header">服务配置</div>
-      <ActiveRingChart :config="state.config3" />
-      <Label-Tag :config="state.labelConfig" />
-    </div>
-
-    <decoration-2 class="decoration-3" :reverse="true" style="width: 5px" />
-
-    <div class="bc-chart-item">
-      <div class="bcci-header">请求转发配置</div>
-      <ActiveRingChart :config="state.config4" />
-      <Label-Tag :config="state.labelConfig" />
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
 import { Decoration2, ActiveRingChart } from '@kjgl77/datav-vue3';
+import { reactive } from 'vue';
 const state = reactive({
   config1: {
     data: [
@@ -135,6 +103,40 @@ const state = reactive({
   },
 });
 </script>
+<template>
+  <div class="bottom-charts">
+    <div class="bc-chart-item">
+      <div class="bcci-header">监听配置</div>
+      <ActiveRingChart :config="state.config1" />
+      <!-- <Label-Tag :config="state.labelConfig" /> -->
+    </div>
+    <decoration-2 class="decoration-1" :reverse="true" style="width: 5px" />
+
+    <div class="bc-chart-item">
+      <div class="bcci-header">注册接口配置</div>
+      <ActiveRingChart :config="state.config2" />
+      <!-- <Label-Tag :config="state.labelConfig" /> -->
+    </div>
+
+    <decoration-2 class="decoration-2" :reverse="true" style="width: 5px" />
+
+    <div class="bc-chart-item">
+      <div class="bcci-header">服务配置</div>
+      <ActiveRingChart :config="state.config3" />
+      <!-- <Label-Tag :config="state.labelConfig" /> -->
+    </div>
+
+    <decoration-2 class="decoration-3" :reverse="true" style="width: 5px" />
+
+    <div class="bc-chart-item">
+      <div class="bcci-header">请求转发配置</div>
+      <ActiveRingChart :config="state.config4" />
+      <!-- <Label-Tag :config="state.labelConfig" /> -->
+    </div>
+  </div>
+</template>
+
+
 
 <style lang="less" scoped>
 .bottom-charts {

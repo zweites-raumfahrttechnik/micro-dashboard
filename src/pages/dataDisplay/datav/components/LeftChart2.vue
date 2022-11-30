@@ -9,6 +9,7 @@
 
 <script lang="ts" setup>
 import { Decoration2, Charts } from '@kjgl77/datav-vue3';
+import { reactive } from 'vue';
 const state = reactive({
   option: {
     series: [

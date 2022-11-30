@@ -61,3 +61,10 @@ export interface GetListData {
   count: number;
   data: GetListDataItem[];
 }
+
+//bi大屏接口
+export interface ServiceMangeListData {
+  liveService: number;
+  approveService: number;
+  notApproveService: number;
+}

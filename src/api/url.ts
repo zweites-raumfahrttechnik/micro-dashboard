@@ -22,3 +22,6 @@ export const BANDWIDTH_CHART_URL = `${v1}/chart/bandwidth`;
 export const POOL_CHART_URL = `${v1}/chart/pool`;
 export const STORAGE_CHART_URL = `${v1}/chart/storage`;
 export const CONCURRENT_CHART_URL = `${v1}/chart/concurrent`;
+
+//bi大屏URL
+export const SERVICE_MANAGE_MONITOR_URL = `${v1}/dataDisplay/serviceManage`;

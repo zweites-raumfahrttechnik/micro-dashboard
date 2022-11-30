@@ -7,12 +7,12 @@ const screen: RouteRecordRaw = {
   component: MAIN_LAYOUT,
   children: [
     {
-      path: 'dataV',
-      name: 'DataV',
-      component: () => import('@/pages/screen/datav/index.vue'),
+      path: 'dataDisplay',
+      name: 'DataDisplay',
+      component: () => import('@/pages/dataDisplay/datav/index.vue'),
       meta: {
         requireAuth: true,
-        locale: '展示视图',
+        locale: '数据展示',
       },
     },
   ],

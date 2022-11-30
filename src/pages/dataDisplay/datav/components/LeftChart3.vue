@@ -8,6 +8,7 @@
 
 <script lang="ts" setup>
 import { CapsuleChart } from '@kjgl77/datav-vue3';
+import { reactive } from 'vue';
 const state = reactive({
   config: {
     data: [

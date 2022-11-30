@@ -15,6 +15,7 @@
 
 <script lang="ts" setup>
 import { Charts } from '@kjgl77/datav-vue3';
+import { reactive } from 'vue';
 const state = reactive({
   option: {
     series: [
