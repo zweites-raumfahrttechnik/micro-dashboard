@@ -17,4 +17,5 @@ export const VISIT_URL = `${v1}/visit`;
 export const VISIT_APPROVE_URL = `${v1}/visit/approve`;
 
 //模板引擎的假API
+export const UPLOAD_PROTO_URL = `${v1}/upload/grpc`;
 export const TEMPLATE_LIST_URL = `${v1}/template/list`;
