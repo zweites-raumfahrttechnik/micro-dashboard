@@ -14,7 +14,7 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
   // 数据绑定
   const searchFormData = reactive<SearchFormData>({
     dataId: '',
-    user: '',
+    createBy: '',
     createAt: [],
   });
 
@@ -62,10 +62,10 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
       params.dataId = searchFormData.dataId;
     }
 
-    if (searchFormData.user && searchFormData.user !== '') {
-      params.user = searchFormData.user;
+    if (searchFormData.createBy && searchFormData.createBy !== '') {
+      params.createBy = searchFormData.createBy;
     }
-    //api里请求里没有createAt参数，但是展示部分存在，是否需要对此条件进行搜索？
+
     if (searchFormData.createAt && searchFormData.createAt.length === 2) {
       params.startAt = searchFormData.createAt[0];
       params.endAt = searchFormData.createAt[1];
@@ -78,6 +78,7 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
     ) {
       params.status = searchFormData.status;
     }
+
     if (
       (searchFormData.type && searchFormData.type === '1') ||
       searchFormData.type === '2' ||
@@ -86,6 +87,7 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
     ) {
       params.type = searchFormData.type;
     }
+
     if (
       (searchFormData.configType && searchFormData.configType === '1') ||
       searchFormData.configType === '2' ||
