@@ -41,7 +41,7 @@ const handleLogin = () => {
     data: {
       username: userInfo.username,
       password: userInfo.password,
-      system: 'MicroServer',
+      system: 'MicroService',
     },
   }).then(item => {
     if (item.error.value || !item.data.value) {
