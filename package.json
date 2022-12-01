@@ -27,6 +27,8 @@
   "dependencies": {
     "@arco-design/web-vue": "^2.38.1",
     "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/lang-cpp": "^6.0.2",
+    "@codemirror/lang-java": "^6.0.1",
     "@types/nprogress": "^0.2.0",
     "@vueuse/core": "^9.4.0",
     "@vueuse/integrations": "^9.4.0",
