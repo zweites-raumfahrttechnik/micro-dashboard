@@ -80,7 +80,7 @@ const handleSubmit = () => {
 
   const a = document.createElement('a');
   a.download = 'demo.zip';
-  a.href = `/api/v1/code/gen`;
+  a.href = `/api/v1/code/gen?${params.toString()}`;
 
   document.body.appendChild(a);
   a.click();
