@@ -6,16 +6,24 @@ import { useAxios } from '@vueuse/integrations/useAxios';
 import { ServiceMangeListData } from '@/api/types';
 import { instance, ResponseWrap } from '@/api';
 
-const { data: serviceMangeListData, execute } = useAxios<ResponseWrap<ServiceMangeListData>>(
+const { data, execute } = useAxios<ResponseWrap<ServiceMangeListData>>(
   SERVICE_MANAGE_MONITOR_URL,
   { method: 'GET' },
   instance,
 );
 
+const allService = ref(0);
+
 watch(
-  () => serviceMangeListData.value?.data?.approveService,
-  approveService => {
-    console.log(`count is: ${approveService}`);
+  () => data.value?.data,
+  serviceMangeListData => {
+    state.config.data[0].value = Number(serviceMangeListData?.liveService);
+    state.config.data[1].value = Number(serviceMangeListData?.approveService);
+    state.config.data[2].value = Number(serviceMangeListData?.notApproveService);
+    allService.value =
+      Number(serviceMangeListData?.liveService) +
+      Number(serviceMangeListData?.approveService) +
+      Number(serviceMangeListData?.notApproveService);
   },
 );
 
@@ -24,15 +32,15 @@ const state = reactive({
     data: [
       {
         name: '已上线服务',
-        value: 167,
+        value: 0,
       },
       {
         name: '待审批服务',
-        value: 123,
+        value: 0,
       },
       {
         name: '未通过审批服务',
-        value: 67,
+        value: 0,
       },
     ],
     colors: ['#00baff', '#3de7c9', '#fff'],
@@ -43,7 +51,9 @@ const state = reactive({
 <template>
   <div class="left-chart-1">
     <div class="lc1-header">服务管理</div>
-    <div class="lc1-details">执行服务总数<span>430</span></div>
+    <div class="lc1-details">
+      执行服务总数<span>{{ allService }}</span>
+    </div>
     <CapsuleChart class="lc1-chart" :config="state.config" />
     <decoration-2 style="height: 10px" />
   </div>
