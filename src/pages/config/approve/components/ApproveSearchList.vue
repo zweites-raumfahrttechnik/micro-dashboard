@@ -67,27 +67,27 @@ const handleFromReset = () => {
           <Col :span="8">
             <FormItem field="status" label="审批状态">
               <Select v-model="searchFormData.status">
-                <Option :value="0">待审批</Option>
-                <Option :value="1">已通过</Option>
-                <Option :value="2">已拒绝</Option>
+                <Option value="0">待审批</Option>
+                <Option value="1">已通过</Option>
+                <Option value="2">已拒绝</Option>
               </Select>
             </FormItem>
           </Col>
           <Col :span="8">
             <FormItem field="configType" label="配置类型">
               <Select v-model="searchFormData.configType">
-                <Option :value="0">待配置</Option>
-                <Option :value="1">已配置</Option>
-                <Option :value="2">未配置</Option>
+                <Option value="0">待配置</Option>
+                <Option value="1">已配置</Option>
+                <Option value="2">未配置</Option>
               </Select>
             </FormItem>
           </Col>
           <Col :span="8">
             <FormItem field="type" label="类型">
               <Select v-model="searchFormData.type">
-                <Option :value="0">上线申请</Option>
-                <Option :value="1">修改申请</Option>
-                <Option :value="2">删除申请</Option>
+                <Option value="0">上线申请</Option>
+                <Option value="1">修改申请</Option>
+                <Option value="2">删除申请</Option>
               </Select>
             </FormItem>
           </Col>

@@ -3,9 +3,9 @@ export interface SearchParams {
   size: number;
   dataId?: string;
   user?: string;
-  type?: number;
-  configType?: number;
-  status?: number;
+  type?: string;
+  configType?: string;
+  status?: string;
   startAt?: string;
   endAt?: string;
 }

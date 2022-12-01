@@ -72,25 +72,25 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
     }
 
     if (
-      (searchFormData.status && searchFormData.status === 0) ||
-      searchFormData.status === 1 ||
-      searchFormData.status === 2
+      (searchFormData.status && searchFormData.status === '0') ||
+      searchFormData.status === '1' ||
+      searchFormData.status === '2'
     ) {
       params.status = searchFormData.status;
     }
     if (
-      (searchFormData.type && searchFormData.type === 1) ||
-      searchFormData.type === 2 ||
-      searchFormData.type === 3 ||
-      searchFormData.type === 4
+      (searchFormData.type && searchFormData.type === '1') ||
+      searchFormData.type === '2' ||
+      searchFormData.type === '3' ||
+      searchFormData.type === '4'
     ) {
       params.type = searchFormData.type;
     }
     if (
-      (searchFormData.configType && searchFormData.configType === 1) ||
-      searchFormData.configType === 2 ||
-      searchFormData.configType === 3 ||
-      searchFormData.configType === 4
+      (searchFormData.configType && searchFormData.configType === '1') ||
+      searchFormData.configType === '2' ||
+      searchFormData.configType === '3' ||
+      searchFormData.configType === '4'
     ) {
       params.configType = searchFormData.configType;
     }

@@ -67,9 +67,9 @@ const handleFromReset = () => {
           <Col :span="6">
             <FormItem field="status" label="审批状态">
               <Select v-model="searchFormData.status">
-                <Option :value="0">待审批</Option>
-                <Option :value="1">已通过</Option>
-                <Option :value="2">已拒绝</Option>
+                <Option value="0">待审批</Option>
+                <Option value="1">已通过</Option>
+                <Option value="2">已拒绝</Option>
               </Select>
             </FormItem>
           </Col>
