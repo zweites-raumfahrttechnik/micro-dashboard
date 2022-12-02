@@ -15,3 +15,8 @@ export const CONFIG_APPROVE_PUBLISH_URL = `${v1}/config/approve/publish`;
 export const CONFIG_APPROVE_DELETE_URL = `${v1}/config/approve/delete`;
 export const VISIT_URL = `${v1}/visit`;
 export const VISIT_APPROVE_URL = `${v1}/visit/approve`;
+
+// 用户管理
+export const USER_URL = `${v1}/user`;
+export const USER_AUTHORIZATION_URL = `${v1}/auth`;
+export const USER_INFO_URL = `${v1}/info`;
