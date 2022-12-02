@@ -29,7 +29,7 @@ export interface ConfigListItem {
   dataId: string;
   type: string;
   createAt: string;
-  updateAt:string;
+  updateAt: string;
   user: UserInfo;
 }
 
@@ -63,8 +63,42 @@ export interface GetListData {
 }
 
 //bi大屏接口
-export interface ServiceMangeListData {
+//服务管理数据展示
+export interface ServiceDataList {
   liveService: number;
   approveService: number;
   notApproveService: number;
+}
+//配置管理数据展示
+export interface ConfigDataList {
+  liveConfig: number;
+  approveConfig: number;
+  notApproveConfig: number;
+}
+//权限管理数据展示
+export interface PermissionDataList {
+  livePermission: number;
+  approvePermission: number;
+  notApprovePermission: number;
+}
+//服务化集成数据展示
+export interface ServiceData {
+  systemOrientedService: number;
+  serviceOrientedService: number;
+  configOrientedService: number;
+  otherService: number;
+}
+//实例数据展示
+export interface InstanceDataList {
+  count: number;
+  data: InstanceDataItem[];
+}
+export interface InstanceDataItem {
+  name: string;
+  value: number;
+}
+//服务器集群数据展示
+export interface ClusterDataList {
+  count: number;
+  data: [];
 }

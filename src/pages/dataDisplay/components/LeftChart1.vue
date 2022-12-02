@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import { Decoration2, CapsuleChart } from '@kjgl77/datav-vue3';
 import { reactive } from 'vue';
-import { SERVICE_MANAGE_MONITOR_URL } from '@/api/url';
+import { SERVICE_DATA_DISPLAY_URL } from '@/api/url';
 import { useAxios } from '@vueuse/integrations/useAxios';
-import { ServiceMangeListData } from '@/api/types';
+import { ServiceDataList } from '@/api/types';
 import { instance, ResponseWrap } from '@/api';
 
-const { data, execute } = useAxios<ResponseWrap<ServiceMangeListData>>(
-  SERVICE_MANAGE_MONITOR_URL,
+const { data, execute } = useAxios<ResponseWrap<ServiceDataList>>(
+  SERVICE_DATA_DISPLAY_URL,
   { method: 'GET' },
   instance,
 );
@@ -16,14 +16,14 @@ const allService = ref(0);
 
 watch(
   () => data.value?.data,
-  serviceMangeListData => {
-    state.config.data[0].value = Number(serviceMangeListData?.liveService);
-    state.config.data[1].value = Number(serviceMangeListData?.approveService);
-    state.config.data[2].value = Number(serviceMangeListData?.notApproveService);
+  ServiceDataList => {
+    state.config.data[0].value = Number(ServiceDataList?.liveService);
+    state.config.data[1].value = Number(ServiceDataList?.approveService);
+    state.config.data[2].value = Number(ServiceDataList?.notApproveService);
     allService.value =
-      Number(serviceMangeListData?.liveService) +
-      Number(serviceMangeListData?.approveService) +
-      Number(serviceMangeListData?.notApproveService);
+      Number(ServiceDataList?.liveService) +
+      Number(ServiceDataList?.approveService) +
+      Number(ServiceDataList?.notApproveService);
   },
 );
 
@@ -43,7 +43,7 @@ const state = reactive({
         value: 0,
       },
     ],
-    colors: ['#00baff', '#3de7c9', '#fff'],
+
     unit: '项',
   },
 });
@@ -52,7 +52,7 @@ const state = reactive({
   <div class="left-chart-1">
     <div class="lc1-header">服务管理</div>
     <div class="lc1-details">
-      执行服务总数<span>{{ allService }}</span>
+      服务总数<span>{{ allService }}</span>
     </div>
     <CapsuleChart class="lc1-chart" :config="state.config" />
     <decoration-2 style="height: 10px" />
@@ -74,7 +74,8 @@ const state = reactive({
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .lc1-details {

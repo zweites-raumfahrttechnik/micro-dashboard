@@ -9,7 +9,7 @@ const screen: RouteRecordRaw = {
     {
       path: 'dataDisplay',
       name: 'DataDisplay',
-      component: () => import('@/pages/dataDisplay/datav/index.vue'),
+      component: () => import('@/pages/dataDisplay/index.vue'),
       meta: {
         requireAuth: true,
         locale: '数据展示',

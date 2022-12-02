@@ -24,4 +24,15 @@ export const STORAGE_CHART_URL = `${v1}/chart/storage`;
 export const CONCURRENT_CHART_URL = `${v1}/chart/concurrent`;
 
 //bi大屏URL
-export const SERVICE_MANAGE_MONITOR_URL = `${v1}/dataDisplay/serviceManage`;
+//服务数据展示
+export const SERVICE_DATA_DISPLAY_URL = `${v1}/dataDisplay/serviceData`;
+//配置数据展示
+export const CONFIG_DATA_DISPLAY_URL = `${v1}/dataDisplay/configData`;
+//权限数据展示
+export const PERMISSION_DATA_DISPLAY_URL = `${v1}/dataDisplay/permissionData`;
+//服务化集成数据展示
+export const INTEGRATED_SERVICE_DATA_DISPLAY_URL = `${v1}/dataDisplay/integratedServiceData`;
+//实例数据展示
+export const INSTANCE_DATA_DISPLAY_URL = `${v1}/dataDisplay/instanceData`;
+//集群数据展示
+export const CLUSTER_DATA_DISPlAY_URL = `${v1}/dataDisplay/ClusterData`;

@@ -1,4 +1,3 @@
-
 <script lang="ts" setup>
 import {
   BorderBox1 as DvBorderBox1,
@@ -10,56 +9,49 @@ import LeftChart1 from './components/LeftChart1.vue';
 import LeftChart2 from './components/LeftChart2.vue';
 import LeftChart3 from './components/LeftChart3.vue';
 import CenterCmp from './components/CenterCmp.vue';
-import RightChart1 from './components/RightChart1.vue';
 import RightChart2 from './components/RightChart2.vue';
 import BottomCharts from './components/BottomCharts.vue';
 </script>
 
 <template>
   <div id="data-view">
-      <div class="main-header">
-        <div class="mh-left">
-         
-        </div>
-        <div class="mh-middle">软件服务化集成平台</div>
-        <div class="mh-right">
-         
-        </div>
-      </div>
+    <div class="main-header">
+      <div class="mh-left"></div>
+      <div class="mh-middle">软件服务化集成平台</div>
+      <div class="mh-right"></div>
+    </div>
 
-      <DvBorderBox1 class="main-container">
-        <DvBorderBox3 class="left-chart-container">
-          <LeftChart1 />
-          <LeftChart2 />
-          <LeftChart3 />
-        </DvBorderBox3>
+    <DvBorderBox1 class="main-container">
+      <DvBorderBox3 class="left-chart-container">
+        <LeftChart1 />
+        <LeftChart2 />
+        <LeftChart3 />
+      </DvBorderBox3>
 
-        <div class="right-main-container">
-          <div class="rmc-top-container">
-            <DvBorderBox3 class="rmctc-left-container">
-              <CenterCmp />
-            </DvBorderBox3>
+      <div class="right-main-container">
+        <div class="rmc-top-container">
+          <DvBorderBox3 ref="dvBorderBox3" class="rmctc-left-container">
+            <CenterCmp />
+          </DvBorderBox3>
 
-            <div class="rmctc-right-container">
-              <DvBorderBox3 class="rmctc-chart-1">
-                <RightChart1 />
-              </DvBorderBox3>
+          <div class="rmctc-right-container">
+            <!-- <DvBorderBox3 class="rmctc-chart-1">
+              <RightChart1 />
+            </DvBorderBox3> -->
 
-              <DvBorderBox4 class="rmctc-chart-2" :reverse="true">
-                <RightChart2 />
-              </DvBorderBox4>
-            </div>
+            <DvBorderBox4 class="rmctc-chart-2" :reverse="true">
+              <RightChart2 />
+            </DvBorderBox4>
           </div>
-
-          <DvBorderBox4 class="rmc-bottom-container">
-            <BottomCharts />
-          </DvBorderBox4>
         </div>
-      </DvBorderBox1>
+
+        <DvBorderBox4 class="rmc-bottom-container">
+          <BottomCharts />
+        </DvBorderBox4>
+      </div>
+    </DvBorderBox1>
   </div>
 </template>
-
-
 
 <style lang="less">
 #data-view {
@@ -139,6 +131,7 @@ import BottomCharts from './components/BottomCharts.vue';
   }
 
   .rmctc-right-container {
+    height: 100%;
     width: 35%;
   }
 
@@ -148,7 +141,7 @@ import BottomCharts from './components/BottomCharts.vue';
 
   .rmctc-chart-1,
   .rmctc-chart-2 {
-    height: 50%;
+    height: 100%;
   }
 }
 </style>
