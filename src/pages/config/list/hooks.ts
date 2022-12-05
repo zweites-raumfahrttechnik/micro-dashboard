@@ -88,15 +88,21 @@ const [useDrawerProvideStore, useDrawerStore] = createInjectionState(() => {
   return { drawerVisible, selectService };
 });
 
-const [useModifyConfigModalProvideStore,useModifyConfigModalStore]=createInjectionState(() => {
+const [useModifyConfigModalProvideStore, useModifyConfigModalStore] = createInjectionState(() => {
   const modifyModalVisible = ref(false);
   const ModifyForm = reactive<{ dataId: string; content: string; type: string }>({
     dataId: ' ',
     content: ' ',
     type: '',
   });
-  return { modifyModalVisible ,ModifyForm};
+  return { modifyModalVisible, ModifyForm };
 });
 
-
-export { useTableProvideStore, useTableStore, useDrawerProvideStore, useDrawerStore,useModifyConfigModalProvideStore,useModifyConfigModalStore };
+export {
+  useTableProvideStore,
+  useTableStore,
+  useDrawerProvideStore,
+  useDrawerStore,
+  useModifyConfigModalProvideStore,
+  useModifyConfigModalStore,
+};

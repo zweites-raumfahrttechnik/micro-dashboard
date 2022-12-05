@@ -2,7 +2,7 @@ import { useAxios } from '@vueuse/integrations/useAxios';
 import { FormInstance } from '@arco-design/web-vue';
 
 import { instance, ResponseWrap } from '@/api';
-import { THEME_APPROVE_URL } from '@/api/url';
+import { VISIT_URL } from '@/api/url';
 import { ThemeListData } from '@/api/types';
 
 import { SearchParams, SearchFormData } from './types';
@@ -26,7 +26,7 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
 
   // 请求服务列表
   const { data, isLoading, execute } = useAxios<ResponseWrap<ThemeListData>>(
-    THEME_APPROVE_URL,
+    VISIT_URL,
     {
       method: 'GET',
       params: {

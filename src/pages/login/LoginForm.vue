@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useAxios } from '@vueuse/integrations/useAxios';
 import {
   Form,
   FormItem,
@@ -9,22 +10,50 @@ import {
   Checkbox,
 } from '@arco-design/web-vue';
 import { IconUser, IconLock } from '@arco-design/web-vue/es/icon';
-import { useAppModel } from '@/model';
+import { instance, ResponseWrap } from '@/api';
+import { LOGIN_URL } from '@/api/url';
+import { useAppModel, useUserModel } from '@/model';
+
+interface LoginResponse {
+  token: string;
+  role: number;
+}
 
 const router = useRouter();
-
-const handleLogin = () => {
-  router.replace({ name: 'Overview' });
-};
 
 const {
   state: { title },
 } = useAppModel();
 
+const { setUser } = useUserModel();
+
+const { execute } = useAxios<ResponseWrap<LoginResponse>>(LOGIN_URL, { method: 'POST' }, instance, {
+  immediate: false,
+});
+
 const userInfo = reactive({
   username: '',
   password: '',
 });
+
+const handleLogin = () => {
+  execute({
+    data: {
+      username: userInfo.username,
+      password: userInfo.password,
+      system: 'MicroService',
+    },
+  }).then(item => {
+    if (item.error.value || !item.data.value) {
+      return;
+    }
+
+    const { token, role } = item.data.value.data as LoginResponse;
+
+    setUser(token, role === 1 ? 'admin' : 'user');
+    router.replace({ name: 'Overview' });
+  });
+};
 </script>
 
 <template>

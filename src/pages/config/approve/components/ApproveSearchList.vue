@@ -38,75 +38,80 @@ const handleFromReset = () => {
 <template>
   <Row>
     <Col :flex="1">
-    <Form ref="searchFormRef" :model="searchFormData" :label-col-props="{ span: 6 }" :wrapper-col-props="{ span: 18 }"
-      label-align="left">
-      <Row :gutter="16">
-        <Col :span="8">
-        <FormItem field="dataId" label="配置文件名">
-          <Input v-model="searchFormData.dataId" placeholder="请输入配置文件名" />
-        </FormItem>
-        </Col>
+      <Form
+        ref="searchFormRef"
+        :model="searchFormData"
+        :label-col-props="{ span: 6 }"
+        :wrapper-col-props="{ span: 18 }"
+        label-align="left"
+      >
+        <Row :gutter="16">
+          <Col :span="8">
+            <FormItem field="dataId" label="配置文件名">
+              <Input v-model="searchFormData.dataId" placeholder="请输入配置文件名" />
+            </FormItem>
+          </Col>
 
-        <Col :span="8">
-        <FormItem field="user" label="创建者">
-          <Input v-model="searchFormData.user" placeholder="请输入创建者" />
-        </FormItem>
-        </Col>
+          <Col :span="8">
+            <FormItem field="createBy" label="创建者">
+              <Input v-model="searchFormData.createBy" placeholder="请输入创建者" />
+            </FormItem>
+          </Col>
 
-        <Col :span="8">
-        <FormItem field="createAt" label="创建时间">
-          <RangePicker v-model="searchFormData.createAt" style="width: 100%" />
-        </FormItem>
-        </Col>
+          <Col :span="8">
+            <FormItem field="createAt" label="创建时间">
+              <RangePicker v-model="searchFormData.createAt" style="width: 100%" />
+            </FormItem>
+          </Col>
 
-        <Col :span="8">
-        <FormItem field="status" label="审批状态">
-          <Select v-model="searchFormData.status">
-            <Option :value="0">待审批</Option>
-            <Option :value="1">已通过</Option>
-            <Option :value="2">已拒绝</Option>
-          </Select>
-        </FormItem>
-        </Col>
-        <Col :span="8">
-        <FormItem field="configType" label="配置类型">
-          <Select v-model="searchFormData.configType">
-            <Option :value="0">待配置</Option>
-            <Option :value="1">已配置</Option>
-            <Option :value="2">未配置</Option>
-          </Select>
-        </FormItem>
-        </Col>
-        <Col :span="8">
-        <FormItem field="type" label="类型">
-          <Select v-model="searchFormData.type">
-            <Option :value="0">上线申请</Option>
-            <Option :value="1">修改申请</Option>
-            <Option :value="2">删除申请</Option>
-          </Select>
-        </FormItem>
-        </Col>
-      </Row>
-    </Form>
+          <Col :span="8">
+            <FormItem field="status" label="审批状态">
+              <Select v-model="searchFormData.status">
+                <Option value="0">待审批</Option>
+                <Option value="1">已通过</Option>
+                <Option value="2">已拒绝</Option>
+              </Select>
+            </FormItem>
+          </Col>
+
+          <Col :span="8">
+            <FormItem field="configType" label="配置类型">
+              <Select v-model="searchFormData.configType">
+                <Option value="1">公有配置</Option>
+                <Option value="2">私有配置</Option>
+              </Select>
+            </FormItem>
+          </Col>
+
+          <Col :span="8">
+            <FormItem field="type" label="类型">
+              <Select v-model="searchFormData.type">
+                <Option value="1">修改申请</Option>
+                <Option value="2">删除申请</Option>
+              </Select>
+            </FormItem>
+          </Col>
+        </Row>
+      </Form>
     </Col>
 
-    <Divider style="height: 34px" direction="vertical" />
+    <Divider style="height: 85px" direction="vertical" />
 
     <Col flex="86px">
-    <Space direction="vertical" align="center" :size="18">
-      <Button type="primary" :loading="isLoading" @click="handleSearch">
-        <template #icon>
-          <IconSearch />
-        </template>
-        搜索
-      </Button>
-      <Button @click="handleFromReset">
-        <template #icon>
-          <IconRefresh />
-        </template>
-        重置
-      </Button>
-    </Space>
+      <Space direction="vertical" align="center" :size="18">
+        <Button type="primary" :loading="isLoading" @click="handleSearch">
+          <template #icon>
+            <IconSearch />
+          </template>
+          搜索
+        </Button>
+        <Button @click="handleFromReset">
+          <template #icon>
+            <IconRefresh />
+          </template>
+          重置
+        </Button>
+      </Space>
     </Col>
   </Row>
 </template>
