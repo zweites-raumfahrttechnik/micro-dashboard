@@ -72,9 +72,9 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
     }
 
     if (
-      (searchFormData.status && searchFormData.status === 0) ||
-      searchFormData.status === 1 ||
-      searchFormData.status === 2
+      (searchFormData.status && searchFormData.status === '0') ||
+      searchFormData.status === '1' ||
+      searchFormData.status === '2'
     ) {
       params.status = searchFormData.status;
     }

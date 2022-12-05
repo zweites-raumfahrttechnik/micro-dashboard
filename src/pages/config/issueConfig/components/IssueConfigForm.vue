@@ -17,10 +17,9 @@ const emit = defineEmits<{
 const formRef = ref<FormInstance>();
 
 // 初始化表单初值
-const formData = reactive<{ dataID: string; content: string; type: string }>({
+const formData = reactive<{ dataID: string; content: string; type?: number }>({
   dataID: '',
   content: '',
-  type: '',
 });
 
 const { execute, isLoading } = useAxios(CONFIG_URL, { method: 'POST' }, instance, {
@@ -38,7 +37,10 @@ const handleSubmit = async () => {
     data: {
       ...formData,
     },
-  }).then(() => {
+  }).then(item => {
+    if (item.error.value) {
+      return;
+    }
     formRef.value?.resetFields();
     emit('change-step', 1);
   });
@@ -64,10 +66,8 @@ const handleSubmit = async () => {
       </FormItem>
       <FormItem field="type" label="类型" :rules="[{ required: true, message: '必填' }]">
         <Select v-model="formData.type" placeholder="请选择配置类型">
-          <Option value="1">配置一</Option>
-          <Option value="2">配置二</Option>
-          <Option value="3">配置三</Option>
-          <Option value="4">配置四</Option>
+          <Option :value="1">公有配置</Option>
+          <Option :value="2">私有配置</Option>
         </Select>
       </FormItem>
       <FormItem>

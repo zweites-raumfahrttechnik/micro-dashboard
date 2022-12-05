@@ -53,8 +53,8 @@ const handleFromReset = () => {
           </Col>
 
           <Col :span="8">
-            <FormItem field="user" label="创建者">
-              <Input v-model="searchFormData.user" placeholder="请输入创建者" />
+            <FormItem field="createBy" label="创建者">
+              <Input v-model="searchFormData.createBy" placeholder="请输入创建者" />
             </FormItem>
           </Col>
 
@@ -67,27 +67,27 @@ const handleFromReset = () => {
           <Col :span="8">
             <FormItem field="status" label="审批状态">
               <Select v-model="searchFormData.status">
-                <Option :value="0">待审批</Option>
-                <Option :value="1">已通过</Option>
-                <Option :value="2">已拒绝</Option>
+                <Option value="0">待审批</Option>
+                <Option value="1">已通过</Option>
+                <Option value="2">已拒绝</Option>
               </Select>
             </FormItem>
           </Col>
+
           <Col :span="8">
             <FormItem field="configType" label="配置类型">
               <Select v-model="searchFormData.configType">
-                <Option :value="0">待配置</Option>
-                <Option :value="1">已配置</Option>
-                <Option :value="2">未配置</Option>
+                <Option value="1">公有配置</Option>
+                <Option value="2">私有配置</Option>
               </Select>
             </FormItem>
           </Col>
+
           <Col :span="8">
             <FormItem field="type" label="类型">
               <Select v-model="searchFormData.type">
-                <Option :value="0">上线申请</Option>
-                <Option :value="1">修改申请</Option>
-                <Option :value="2">删除申请</Option>
+                <Option value="1">修改申请</Option>
+                <Option value="2">删除申请</Option>
               </Select>
             </FormItem>
           </Col>
@@ -95,7 +95,7 @@ const handleFromReset = () => {
       </Form>
     </Col>
 
-    <Divider style="height: 34px" direction="vertical" />
+    <Divider style="height: 85px" direction="vertical" />
 
     <Col flex="86px">
       <Space direction="vertical" align="center" :size="18">

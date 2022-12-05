@@ -35,7 +35,10 @@ const handleSubmit = async () => {
     data: {
       ...formData,
     },
-  }).then(() => {
+  }).then(item => {
+    if (item.error.value) {
+      return;
+    }
     formRef.value?.resetFields();
     emit('change-step', 1);
   });

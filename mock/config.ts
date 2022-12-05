@@ -52,8 +52,8 @@ const requests: MockMethod[] = [
             dataId: Random.title(),
             createAt: Random.time('yyyy-MM-dd hh:mm'),
             status: Random.pick([0, 1, 2]),
-            configType: Random.pick([0, 1, 2]),
-            type: Random.pick([0, 1, 2]),
+            configType: Random.pick([1, 2]),
+            type: Random.pick([1, 2]),
             user: {
               nickName: Random.name(),
               uuid: Random.id(),

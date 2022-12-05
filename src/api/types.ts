@@ -110,4 +110,12 @@ export interface CurrentUserInfo {
 
 export interface authItem {
   role: number;
+
+export interface TemplateListItem {
+  templateName: string;
+  status: number;
+}
+
+export interface TemplateListData {
+  data: TemplateListItem[];
 }

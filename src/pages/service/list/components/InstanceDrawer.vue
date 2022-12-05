@@ -13,7 +13,7 @@ import {
 } from '@arco-design/web-vue';
 
 import { instance, ResponseWrap } from '@/api';
-import { THEME_INSTANCE_URL, THEME_DETAIL_URL } from '@/api/url';
+import { THEME_INSTANCE_URL, THEME_DETAIL_URL, VISIT_URL } from '@/api/url';
 import { ServiceDetail } from '@/api/types';
 
 import { useDrawerStore } from '../hooks';
@@ -34,11 +34,18 @@ const { data, execute, isLoading } = useAxios<ResponseWrap<ServiceDetail>>(
   },
 );
 
-const { isLoading: deleteLoading, execute: deleteExecute } = useAxios(
+const { isLoading: instanceDeleteLoading, execute: instanceDeleteExecute } = useAxios(
   THEME_INSTANCE_URL,
   {
     method: 'DELETE',
   },
+  instance,
+  { immediate: false },
+);
+
+const { isLoading: serviceDeleteLoading, execute: serviceDeleteExecute } = useAxios(
+  VISIT_URL,
+  { method: 'DELETE' },
   instance,
   { immediate: false },
 );
@@ -51,9 +58,15 @@ watch(
 );
 
 const handleDeleteInstance = async (uuid: string) => {
-  await deleteExecute({ data: { uuid } });
+  await instanceDeleteExecute({ data: { uuid } });
 
-  execute();
+  execute({ params: { uuid: selectService.value } });
+};
+
+const handleDeleteService = async (uuid: string) => {
+  await serviceDeleteExecute({ data: { visitor: selectService.value, visited: uuid } });
+
+  execute({ params: { uuid: selectService.value } });
 };
 </script>
 
@@ -75,7 +88,7 @@ const handleDeleteInstance = async (uuid: string) => {
             :bordered="false"
             :data="data?.data?.instance.data"
             :pagination="false"
-            :loading="deleteLoading || isLoading"
+            :loading="instanceDeleteLoading || isLoading"
           >
             <template #columns>
               <TableColumn title="实例运行IP" data-index="ip" />
@@ -110,14 +123,14 @@ const handleDeleteInstance = async (uuid: string) => {
             :bordered="false"
             :data="data?.data?.visited.data"
             :pagination="false"
-            :loading="deleteLoading || isLoading"
+            :loading="serviceDeleteLoading || isLoading"
           >
             <template #columns>
               <TableColumn title="被访问服务名称" data-index="name" />
 
               <TableColumn title="服务创建者">
                 <template #cell="{ record }">
-                  {{ record.user.nickName }}
+                  {{ record.user && record.user.nickName ? record.user.nickName : '' }}
                 </template>
               </TableColumn>
 
@@ -127,7 +140,7 @@ const handleDeleteInstance = async (uuid: string) => {
                 <template #cell="{ record }">
                   <Popconfirm
                     content="请确认是否删除此实例"
-                    @ok="() => handleDeleteInstance(record.uuid)"
+                    @ok="() => handleDeleteService(record.uuid)"
                   >
                     <Button type="text" status="danger">删除</Button>
                   </Popconfirm>
