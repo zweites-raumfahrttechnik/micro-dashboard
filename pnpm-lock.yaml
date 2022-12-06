@@ -2,8 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@arco-design/web-vue': ^2.38.1
-  '@codemirror/lang-cpp': ^6.0.2
-  '@codemirror/lang-java': ^6.0.1
   '@codemirror/lang-json': ^6.0.1
   '@types/mockjs': ^1.0.7
   '@types/node': ^18.11.9
@@ -49,8 +47,6 @@ specifiers:
 
 dependencies:
   '@arco-design/web-vue': 2.38.1_vue@3.2.41
-  '@codemirror/lang-cpp': 6.0.2
-  '@codemirror/lang-java': 6.0.1
   '@codemirror/lang-json': 6.0.1
   '@types/nprogress': 0.2.0
   '@vueuse/core': 9.4.0_vue@3.2.41
@@ -430,20 +426,6 @@ packages:
       '@lezer/common': 1.0.1
     dev: false
 
-  /@codemirror/lang-cpp/6.0.2:
-    resolution: {integrity: sha512-6oYEYUKHvrnacXxWxYa6t4puTlbN3dgV662BDfSH8+MfjQjVmP697/KYTDOqpxgerkvoNm7q5wlFMBeX8ZMocg==}
-    dependencies:
-      '@codemirror/language': 6.3.1
-      '@lezer/cpp': 1.0.0
-    dev: false
-
-  /@codemirror/lang-java/6.0.1:
-    resolution: {integrity: sha512-OOnmhH67h97jHzCuFaIEspbmsT98fNdhVhmA3zCxW0cn7l8rChDhZtwiwJ/JOKXgfm4J+ELxQihxaI7bj7mJRg==}
-    dependencies:
-      '@codemirror/language': 6.3.1
-      '@lezer/java': 1.0.0
-    dev: false
-
   /@codemirror/lang-json/6.0.1:
     resolution: {integrity: sha512-+T1flHdgpqDDlJZ2Lkil/rLiRy684WMLc74xUnjJH48GQdfJo/pudlTRreZmKwzP8/tGdKf83wlbAdOCzlJOGQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/@codemirror/lang-json/-/lang-json-6.0.1.tgz}
     dependencies:
@@ -598,24 +580,10 @@ packages:
     resolution: {integrity: sha512-8TR5++Q/F//tpDsLd5zkrvEX5xxeemafEaek7mUp7Y+bI8cKQXdSqhzTOBaOogETcMOVr0pT3BBPXp13477ciw==}
     dev: false
 
-  /@lezer/cpp/1.0.0:
-    resolution: {integrity: sha512-Klk3/AIEKoptmm6cNm7xTulNXjdTKkD+hVOEcz/NeRg8tIestP5hsGHJeFDR/XtyDTxsjoPjKZRIGohht7zbKw==}
-    dependencies:
-      '@lezer/highlight': 1.1.2
-      '@lezer/lr': 1.2.5
-    dev: false
-
   /@lezer/highlight/1.1.2:
     resolution: {integrity: sha512-CAun1WR1glxG9ZdOokTZwXbcwB7PXkIEyZRUMFBVwSrhTcogWq634/ByNImrkUnQhjju6xsIaOBIxvcRJtplXQ==}
     dependencies:
       '@lezer/common': 1.0.1
-    dev: false
-
-  /@lezer/java/1.0.0:
-    resolution: {integrity: sha512-z2EA0JHq2WoiKfQy5uOOd4t17PJtq8guh58gPkSzOnNcQ7DNbkrU+Axak+jL8+Noinwyz2tRNOseQFj+Tg+P0A==}
-    dependencies:
-      '@lezer/highlight': 1.1.2
-      '@lezer/lr': 1.2.5
     dev: false
 
   /@lezer/json/1.0.0:
