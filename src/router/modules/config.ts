@@ -31,7 +31,7 @@ const config: RouteRecordRaw = {
       component: () => import('@/pages/config/approve/ApproveList.vue'),
       meta: {
         requireAuth: true,
-        locale: '上线审批',
+        locale: '配置审批',
         roles: ['admin'],
       },
     },
