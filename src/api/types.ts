@@ -38,69 +38,6 @@ export interface ConfigListData {
   data: ConfigListItem[];
 }
 
-export interface ChartValue {
-  count: number;
-  growth: number;
-  value: number[];
-}
-
-export interface ConcurrentChartValue {
-  xAxis: string[];
-  concurrent: number[];
-  through: number[];
-}
-export interface GetListDataItem {
-  uuid: string;
-  username: string;
-  ip: string;
-  port: number;
-  type: number;
-}
-
-export interface GetListData {
-  count: number;
-  data: GetListDataItem[];
-}
-
-//bi大屏接口
-//服务管理数据展示
-export interface ServiceDataList {
-  liveService: number;
-  approveService: number;
-  notApproveService: number;
-}
-//配置管理数据展示
-export interface ConfigDataList {
-  liveConfig: number;
-  approveConfig: number;
-  notApproveConfig: number;
-}
-//权限管理数据展示
-export interface PermissionDataList {
-  livePermission: number;
-  approvePermission: number;
-  notApprovePermission: number;
-}
-//服务化集成数据展示
-export interface ServiceData {
-  systemOrientedService: number;
-  serviceOrientedService: number;
-  configOrientedService: number;
-  otherService: number;
-}
-//实例数据展示
-export interface InstanceDataList {
-  count: number;
-  data: InstanceDataItem[];
-}
-export interface InstanceDataItem {
-  name: string;
-  value: number;
-}
-//服务器集群数据展示
-export interface ClusterDataList {
-  count: number;
-  data: [];
 export interface AllThemeListDataItem {
   uuid: string;
   name: string;

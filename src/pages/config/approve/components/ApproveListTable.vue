@@ -32,7 +32,6 @@ const handlePageChange = (page: number) => {
   pagination.current = page;
 };
 
-
 const handleAgreeConfig = async (uuid: string, status: 1 | 2, type: 1 | 2) => {
   if (type === 1) {
     await publishExecute({ data: { uuid, status } });
@@ -131,7 +130,6 @@ const handleRejectConfig = async (uuid: string, status: 1 | 2, type: 1 | 2) => {
 
       <TableColumn title="操作">
         <template #cell="{ record }">
-
           <Space>
             <Popconfirm
               content="请确认是否通过此请求"
