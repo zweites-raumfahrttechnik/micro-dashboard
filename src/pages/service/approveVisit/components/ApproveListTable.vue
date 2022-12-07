@@ -24,7 +24,7 @@ const handlePageChange = (page: number) => {
   pagination.current = page;
 };
 
-const handleApproveVisit = async (uuid: string, status: 2 | 3) => {
+const handleApproveVisit = async (uuid: string, status: 1 | 2) => {
   await execute({ data: { uuid, status } });
 
   refreshList();
@@ -59,8 +59,8 @@ const handleApproveVisit = async (uuid: string, status: 2 | 3) => {
 
       <TableColumn title="审批状态">
         <template #cell="{ record }">
-          <Tag v-if="record.status === 2" color="green">已通过</Tag>
-          <Tag v-else-if="record.status === 3" color="red">未通过</Tag>
+          <Tag v-if="record.status === 1" color="green">已通过</Tag>
+          <Tag v-else-if="record.status === 2" color="red">未通过</Tag>
           <Tag v-else>待审批</Tag>
         </template>
       </TableColumn>
@@ -70,16 +70,16 @@ const handleApproveVisit = async (uuid: string, status: 2 | 3) => {
           <Space>
             <Popconfirm
               content="请确认是否通过此上线请求"
-              @ok="() => handleApproveVisit(record.uuid, 2)"
+              @ok="() => handleApproveVisit(record.uuid, 1)"
             >
-              <Button type="text" status="normal" :disabled="record.status !== 1">通过</Button>
+              <Button type="text" status="normal" :disabled="record.status !== 0">通过</Button>
             </Popconfirm>
 
             <Popconfirm
               content="请确认是否拒绝此上线请求"
-              @ok="() => handleApproveVisit(record.uuid, 3)"
+              @ok="() => handleApproveVisit(record.uuid, 2)"
             >
-              <Button type="text" status="danger" :disabled="record.status !== 1">拒绝</Button>
+              <Button type="text" status="danger" :disabled="record.status !== 0">拒绝</Button>
             </Popconfirm>
           </Space>
         </template>
