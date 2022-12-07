@@ -82,27 +82,4 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
   return { searchFormRef, searchFormData, tableData, isLoading, pagination, refreshList };
 });
 
-const [useDrawerProvideStore, useDrawerStore] = createInjectionState(() => {
-  const drawerVisible = ref(false);
-  const selectService = ref('');
-  return { drawerVisible, selectService };
-});
-
-const [useModifyConfigModalProvideStore, useModifyConfigModalStore] = createInjectionState(() => {
-  const modifyModalVisible = ref(false);
-  const ModifyForm = reactive<{ dataId: string; content: string; type: string }>({
-    dataId: ' ',
-    content: ' ',
-    type: '',
-  });
-  return { modifyModalVisible, ModifyForm };
-});
-
-export {
-  useTableProvideStore,
-  useTableStore,
-  useDrawerProvideStore,
-  useDrawerStore,
-  useModifyConfigModalProvideStore,
-  useModifyConfigModalStore,
-};
+export { useTableProvideStore, useTableStore };

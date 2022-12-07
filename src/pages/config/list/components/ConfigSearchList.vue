@@ -59,10 +59,8 @@ const handleFormReset = () => {
           <Col :span="12">
             <FormItem field="type" label="配置类型">
               <Select v-model="searchFormData.type" placeholder="请选择配置类型" allow-clear>
-                <Option :value="1">配置一</Option>
-                <Option :value="2">配置二</Option>
-                <Option :value="3">配置三</Option>
-                <Option :value="4">配置四</Option>
+                <Option :value="1">公有配置</Option>
+                <Option :value="2">私有配置</Option>
               </Select>
             </FormItem>
           </Col>
