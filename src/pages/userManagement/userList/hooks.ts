@@ -67,6 +67,7 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
 
 const [useDrawerProvideStore, useDrawerStore] = createInjectionState(() => {
   const drawerVisible = ref(false);
+  const userdrawVisible=ref(false);
   const selectUser = reactive<UserUpdateInfo>({});
 
   // 表单实例
@@ -105,7 +106,7 @@ const [useDrawerProvideStore, useDrawerStore] = createInjectionState(() => {
     });
   };
 
-  return { drawerVisible, selectUser, isLoading, authData, UserInfoUpdateFormRef, selectLoadMore };
+  return { drawerVisible, userdrawVisible,selectUser, isLoading, authData, UserInfoUpdateFormRef, selectLoadMore };
 });
 
 export { useTableProvideStore, useTableStore, useDrawerProvideStore, useDrawerStore };

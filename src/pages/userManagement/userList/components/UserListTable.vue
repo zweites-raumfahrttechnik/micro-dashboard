@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAxios } from '@vueuse/integrations/useAxios';
-import { Table, TableColumn, Space, Button, Popconfirm } from '@arco-design/web-vue';
+import { Table, TableColumn, Space, Button, Popconfirm,Link } from '@arco-design/web-vue';
 
 import { instance } from '@/api';
 import { USER_URL } from '@/api/url';
@@ -8,7 +8,7 @@ import { USER_URL } from '@/api/url';
 import { useTableStore, useDrawerStore } from '../hooks';
 
 const { pagination, tableData, isLoading, refreshList } = useTableStore()!;
-const { drawerVisible, selectUser } = useDrawerStore()!;
+const { drawerVisible, userdrawVisible,selectUser } = useDrawerStore()!;
 
 const { isLoading: deleteIsLoading, execute: execute } = useAxios(
   USER_URL,
@@ -38,6 +38,13 @@ const handleShowUserInfoUpdateDrawer = (record: any) => {
   selectUser.auth = record.authid;
   selectUser.password = '';
 };
+const handShowPermissions = (record: any) => {
+  userdrawVisible.value = true;
+  selectUser.nickname = record.nickname;
+  selectUser.uuid = record.uuid;
+  selectUser.auth = record.authid;
+  selectUser.password = '';
+};
 </script>
 
 <template>
@@ -50,7 +57,11 @@ const handleShowUserInfoUpdateDrawer = (record: any) => {
     @page-change="handlePageChange"
   >
     <template #columns>
-      <TableColumn title="用户名" data-index="username" />
+      <TableColumn title="用户名">
+        <template #cell="{ record }">
+          <Link @click="() => handShowPermissions(record)">{{ record.username }}</Link>
+        </template>
+      </TableColumn>
 
       <TableColumn title="昵称" data-index="nickname" />
 

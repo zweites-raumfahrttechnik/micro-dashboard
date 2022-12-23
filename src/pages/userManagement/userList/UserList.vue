@@ -8,6 +8,7 @@ import { useTableProvideStore, useDrawerProvideStore } from './hooks';
 import UserSearchList from './components/UserSearchList.vue';
 import UserListTable from './components/UserListTable.vue';
 import UserInfoUpdateDrawer from './components/UserInfoUpdateDrawer.vue';
+import UserDrawerVue from './components/UserDrawer.vue';
 
 useTableProvideStore();
 useDrawerProvideStore();
@@ -30,5 +31,6 @@ useDrawerProvideStore();
     </Card>
 
     <UserInfoUpdateDrawer />
+    <UserDrawerVue/>
   </PageContainer>
 </template>
