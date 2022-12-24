@@ -2,7 +2,6 @@
 import { Card, Descriptions, CardMeta, TypographyText, Tag, Button } from '@arco-design/web-vue';
 import { IconCheckCircleFill } from '@arco-design/web-vue/es/icon';
 import { useTableStore } from '../hooks';
-import { watch } from 'vue';
 
 const { userdata } = useTableStore()!;
 

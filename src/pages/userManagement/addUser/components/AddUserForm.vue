@@ -71,8 +71,8 @@ const handleSubmit = async () => {
           size="large"
           @dropdown-reach-bottom="selectLoadMore"
         >
-          <Option v-for="item in authData" :key="item.id" :value="item.id">
-            {{ item.id }}
+          <Option v-for="item in authData" :key="item.uuid" :value="item.uuid">
+            {{ item.uuid }}
           </Option>
         </Select>
       </FormItem>

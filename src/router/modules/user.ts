@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 import { MAIN_LAYOUT } from '@/router/constant';
 
-const service: RouteRecordRaw = {
+const user: RouteRecordRaw = {
   path: '/user',
   name: 'User',
   component: MAIN_LAYOUT,
@@ -46,4 +46,4 @@ const service: RouteRecordRaw = {
   meta: { requireAuth: true, locale: '用户管理', icon: 'icon-common' },
 };
 
-export default service;
+export default user;
