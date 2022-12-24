@@ -34,11 +34,6 @@ const handleFromReset = () => {
       >
         <Row :gutter="16">
           <Col :span="8">
-            <FormItem field="authname" label="权限名">
-              <Input v-model="searchFormData.authname" placeholder="请输入权限名" />
-            </FormItem>
-          </Col>
-          <Col :span="8">
             <FormItem field="systemname" label="系统名">
               <Input v-model="searchFormData.systemname" placeholder="请输入系统名" />
             </FormItem>

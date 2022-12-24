@@ -3,7 +3,7 @@ import { FormInstance } from '@arco-design/web-vue';
 
 import { instance, ResponseWrap } from '@/api';
 import { USER_INFO_URL } from '@/api/url';
-import { CurrentUserInfo, authItem } from '@/api/types';
+import { CurrentUserInfo } from '@/api/types';
 import { ref, reactive } from 'vue';
 
 const [useTableProvideStore, useTableStore] = createInjectionState(() => {

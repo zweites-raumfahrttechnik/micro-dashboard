@@ -79,37 +79,41 @@ export interface ServiceDetail {
 
 // 用户管理
 
-export interface UserItem {
-  uuid: string;
-  username: string;
+export interface CurrentUserInfo {
   nickname: string;
-  authid: number[];
+  auth: auth[];
+}
+
+export interface auth {
+  role: number;
 }
 
 export interface UserListData {
   count: number;
-  userdata: UserItem[];
+  data: UserItem[];
 }
 
-export interface AuthItem {
-  id: number;
+export interface UserItem {
   uuid: string;
-  systemname: string;
-  authname: string;
+  username: string;
+  nickname: string;
 }
 
 export interface AuthListData {
   count: number;
-  authdata: AuthItem[];
+  data: AuthItem[];
 }
 
-export interface CurrentUserInfo {
-  nickname: string;
-  auth: authItem[];
+export interface AuthItem {
+  uuid: string;
+  system: string;
+  auth: string;
 }
 
-export interface authItem {
+export interface UserAuthInfo {
+  system: string;
   role: number;
+}
 
 export interface TemplateListItem {
   templateName: string;

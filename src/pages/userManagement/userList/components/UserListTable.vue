@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { useAxios } from '@vueuse/integrations/useAxios';
-import { Table, TableColumn, Space, Button, Popconfirm,Link } from '@arco-design/web-vue';
+import { Table, TableColumn, Space, Button, Popconfirm, Link } from '@arco-design/web-vue';
 
 import { instance } from '@/api';
 import { USER_URL } from '@/api/url';
 
-import { useTableStore, useDrawerStore } from '../hooks';
+import { useTableStore, useInfoUpdateDrawerStore, useInfoDrawerStore } from '../hooks';
 
 const { pagination, tableData, isLoading, refreshList } = useTableStore()!;
-const { drawerVisible, userdrawVisible,selectUser } = useDrawerStore()!;
+const { useInfoUpdateDrawerVisible, selectUser } = useInfoUpdateDrawerStore()!;
+const { useInfoDrawVisible, selectUuid } = useInfoDrawerStore()!;
 
 const { isLoading: deleteIsLoading, execute: execute } = useAxios(
   USER_URL,
@@ -31,19 +32,14 @@ const handleDeleteUser = async (uuid: string) => {
 };
 
 const handleShowUserInfoUpdateDrawer = (record: any) => {
-  drawerVisible.value = true;
+  useInfoUpdateDrawerVisible.value = true;
 
   selectUser.nickname = record.nickname;
   selectUser.uuid = record.uuid;
-  selectUser.auth = record.authid;
-  selectUser.password = '';
 };
-const handShowPermissions = (record: any) => {
-  userdrawVisible.value = true;
-  selectUser.nickname = record.nickname;
-  selectUser.uuid = record.uuid;
-  selectUser.auth = record.authid;
-  selectUser.password = '';
+const handShowPermissions = (uuid: any) => {
+  useInfoDrawVisible.value = true;
+  selectUuid.value = uuid;
 };
 </script>
 
@@ -59,13 +55,11 @@ const handShowPermissions = (record: any) => {
     <template #columns>
       <TableColumn title="用户名">
         <template #cell="{ record }">
-          <Link @click="() => handShowPermissions(record)">{{ record.username }}</Link>
+          <Link @click="() => handShowPermissions(record.uuid)">{{ record.username }}</Link>
         </template>
       </TableColumn>
 
       <TableColumn title="昵称" data-index="nickname" />
-
-      <TableColumn title="权限id" data-index="authid" />
 
       <TableColumn title="操作">
         <template #cell="{ record }">

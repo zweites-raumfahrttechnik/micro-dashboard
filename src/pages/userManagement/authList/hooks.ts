@@ -14,7 +14,6 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
   // 数据绑定
   const searchFormData = reactive({
     systemname: '',
-    authname: '',
   });
 
   // 分页参数
@@ -37,7 +36,7 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
   );
 
   // 服务表格数据计算属性
-  const tableData = computed(() => data.value?.data?.authdata || []);
+  const tableData = computed(() => data.value?.data?.data || []);
 
   // 变更分页参数
   watch(
@@ -56,10 +55,6 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
   // 刷新列表
   const refreshList = () => {
     const params: SearchParams = { pg: pagination.current, size: pagination.pageSize };
-
-    if (searchFormData.authname && searchFormData.authname !== '') {
-      params.authname = searchFormData.authname;
-    }
 
     if (searchFormData.systemname && searchFormData.systemname !== '') {
       params.systemname = searchFormData.systemname;
