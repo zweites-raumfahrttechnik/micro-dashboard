@@ -7,6 +7,8 @@ import {
   Input,
   Radio,
   RadioGroup,
+  Checkbox,
+  CheckboxGroup,
   Upload,
   RequestOption,
   UploadRequest,
@@ -37,6 +39,19 @@ const formData = reactive<FormDataType>({
   name: '',
   filePath: '',
 });
+
+const protocol = ref<[number]>([1]);
+
+watch(
+  () => protocol.value,
+  val => {
+    if (val.indexOf(0) !== -1) {
+      formData.protocol = 0;
+    } else {
+      formData.protocol = 1;
+    }
+  },
+);
 
 const disableSubmit = computed(() => {
   if (formData.protocol === 0 && formData.filePath === '') {
@@ -76,8 +91,6 @@ const handleSubmit = () => {
     params.set(key, '' + val);
   }
 
-  console.log(params.toString());
-
   const a = document.createElement('a');
   a.download = 'demo.zip';
   a.href = `/api/v1/code/gen?${params.toString()}`;
@@ -102,10 +115,10 @@ const handleSubmit = () => {
     </FormItem>
 
     <FormItem field="protocol" label="请求协议" required>
-      <RadioGroup v-model="formData.protocol">
-        <Radio :value="1">Restful</Radio>
-        <Radio :value="0">gRPC</Radio>
-      </RadioGroup>
+      <CheckboxGroup v-model="protocol">
+        <Checkbox :value="1">Restful</Checkbox>
+        <Checkbox :value="0">gRPC</Checkbox>
+      </CheckboxGroup>
     </FormItem>
 
     <FormItem v-if="formData.protocol === 0" label="上传proto文件" required>
