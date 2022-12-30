@@ -3,14 +3,20 @@ import { Card, Row, Col, Divider } from '@arco-design/web-vue';
 
 import PageContainer from '@/components/PageContainer.vue';
 
-import { useTableProvideStore, useDrawerProvideStore } from './hooks';
+import {
+  useTableProvideStore,
+  useInfoUpdateDrawerProvideStore,
+  useInfoDrawerProvideStore,
+} from './hooks';
 
 import UserSearchList from './components/UserSearchList.vue';
 import UserListTable from './components/UserListTable.vue';
 import UserInfoUpdateDrawer from './components/UserInfoUpdateDrawer.vue';
+import UserInfoDrawer from './components/UserInfoDrawer.vue';
 
 useTableProvideStore();
-useDrawerProvideStore();
+useInfoUpdateDrawerProvideStore();
+useInfoDrawerProvideStore();
 </script>
 
 <template>
@@ -30,5 +36,6 @@ useDrawerProvideStore();
     </Card>
 
     <UserInfoUpdateDrawer />
+    <UserInfoDrawer />
   </PageContainer>
 </template>

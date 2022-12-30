@@ -55,11 +55,15 @@ const handleSubmit = async () => {
         <Input v-model="formData.username" placeholder="请输入用户名" />
       </FormItem>
 
+      <FormItem field="nickname" label="昵称">
+        <Input v-model="formData.nickname" placeholder="请输入昵称" />
+      </FormItem>
+
       <FormItem field="password" label="密码" :rules="[{ required: true, message: '必填' }]">
         <InputPassword v-model="formData.password" placeholder="请输入密码" />
       </FormItem>
 
-      <FormItem field="auth" label="权限id" :rules="[{ required: true, message: '必填' }]">
+      <FormItem field="auth" label="系统权限" :rules="[{ required: true, message: '必填' }]">
         <Select
           v-model="formData.auth"
           :loading="isLoading"
@@ -71,8 +75,8 @@ const handleSubmit = async () => {
           size="large"
           @dropdown-reach-bottom="selectLoadMore"
         >
-          <Option v-for="item in authData" :key="item.id" :value="item.id">
-            {{ item.id }}
+          <Option v-for="item in authData" :key="item.system" :value="item.uuid">
+            {{ item.auth == '0' ? '用户 ' + item.system : '管理员 ' + item.system }}
           </Option>
         </Select>
       </FormItem>
