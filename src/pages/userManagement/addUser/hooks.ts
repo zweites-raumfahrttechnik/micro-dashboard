@@ -29,7 +29,7 @@ const [useFormProvideStore, useFormStore] = createInjectionState(() => {
   );
 
   // 服务表格数据计算属性
-  const authData = computed(() => data.value?.data?.authdata || []);
+  const authData = computed(() => data.value?.data?.data || []);
 
   const selectLoadMore = () => {
     pagination.current++;

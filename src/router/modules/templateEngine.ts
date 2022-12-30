@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 import { MAIN_LAYOUT } from '@/router/constant';
 
-const service: RouteRecordRaw = {
+const templateengine: RouteRecordRaw = {
   path: '/template',
   name: 'Template',
   component: MAIN_LAYOUT,
@@ -19,4 +19,4 @@ const service: RouteRecordRaw = {
   meta: { requireAuth: true, locale: '模板引擎', icon: 'icon-bookmark', order: 4 },
 };
 
-export default service;
+export default templateengine;

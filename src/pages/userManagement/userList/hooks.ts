@@ -2,10 +2,10 @@ import { useAxios } from '@vueuse/integrations/useAxios';
 import { FormInstance } from '@arco-design/web-vue';
 
 import { instance, ResponseWrap } from '@/api';
-import { USER_URL, USER_AUTHORIZATION_URL } from '@/api/url';
-import { UserListData, AuthListData } from '@/api/types';
+import { USER_URL, USER_AUTHORIZATION_URL, SOME_USER_AUTHORIZATION_URL } from '@/api/url';
+import { UserListData, AuthListData, UserAuthInfoData } from '@/api/types';
 
-import { SearchParams, UserUpdateInfo } from './tpyes';
+import { SearchParams, UserUpdateInfo } from './types';
 
 const [useTableProvideStore, useTableStore] = createInjectionState(() => {
   // 表单实例
@@ -28,6 +28,7 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
     {
       method: 'GET',
       params: {
+        username: '',
         pg: pagination.current,
         size: pagination.pageSize,
       },
@@ -36,7 +37,7 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
   );
 
   // 服务表格数据计算属性
-  const tableData = computed(() => data.value?.data?.userdata || []);
+  const tableData = computed(() => data.value?.data?.data || []);
 
   // 变更分页参数
   watch(
@@ -54,7 +55,11 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
 
   // 刷新列表
   const refreshList = () => {
-    const params: SearchParams = { pg: pagination.current, size: pagination.pageSize };
+    const params: SearchParams = {
+      username: '',
+      pg: pagination.current,
+      size: pagination.pageSize,
+    };
 
     if (searchFormData.username && searchFormData.username !== '') {
       params.username = searchFormData.username;
@@ -65,8 +70,9 @@ const [useTableProvideStore, useTableStore] = createInjectionState(() => {
   return { searchFormRef, searchFormData, tableData, isLoading, pagination, refreshList };
 });
 
-const [useDrawerProvideStore, useDrawerStore] = createInjectionState(() => {
-  const drawerVisible = ref(false);
+const [useInfoUpdateDrawerProvideStore, useInfoUpdateDrawerStore] = createInjectionState(() => {
+  const useInfoUpdateDrawerVisible = ref(false);
+
   const selectUser = reactive<UserUpdateInfo>({});
 
   // 表单实例
@@ -92,7 +98,7 @@ const [useDrawerProvideStore, useDrawerStore] = createInjectionState(() => {
   );
 
   // 服务表格数据计算属性
-  const authData = computed(() => data.value?.data?.authdata || []);
+  const authData = computed(() => data.value?.data?.data || []);
 
   const selectLoadMore = () => {
     pagination.current++;
@@ -105,7 +111,49 @@ const [useDrawerProvideStore, useDrawerStore] = createInjectionState(() => {
     });
   };
 
-  return { drawerVisible, selectUser, isLoading, authData, UserInfoUpdateFormRef, selectLoadMore };
+  return {
+    useInfoUpdateDrawerVisible,
+    selectUser,
+    isLoading,
+    authData,
+    UserInfoUpdateFormRef,
+    selectLoadMore,
+  };
 });
 
-export { useTableProvideStore, useTableStore, useDrawerProvideStore, useDrawerStore };
+const [useInfoDrawerProvideStore, useInfoDrawerStore] = createInjectionState(() => {
+  const useInfoDrawVisible = ref(false);
+
+  const selectUuid = ref<string>();
+
+  const { data, isLoading, execute } = useAxios<ResponseWrap<UserAuthInfoData>>(
+    SOME_USER_AUTHORIZATION_URL,
+    {
+      method: 'GET',
+    },
+    instance,
+  );
+
+  const userAuthData = computed(() => data.value?.data?.authList);
+
+  watch(
+    () => selectUuid.value,
+    () =>
+      execute({
+        params: {
+          uuid: selectUuid.value,
+        },
+      }),
+  );
+
+  return { useInfoDrawVisible, selectUuid, isLoading, userAuthData };
+});
+
+export {
+  useTableProvideStore,
+  useTableStore,
+  useInfoUpdateDrawerProvideStore,
+  useInfoUpdateDrawerStore,
+  useInfoDrawerProvideStore,
+  useInfoDrawerStore,
+};
