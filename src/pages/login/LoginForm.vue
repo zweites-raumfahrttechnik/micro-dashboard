@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useAxios } from '@vueuse/integrations/useAxios';
 import {
   Form,
   FormItem,
@@ -7,10 +8,16 @@ import {
   Space,
   Button,
   Checkbox,
-  Message,
 } from '@arco-design/web-vue';
 import { IconUser, IconLock } from '@arco-design/web-vue/es/icon';
+import { instance, ResponseWrap } from '@/api';
+import { LOGIN_URL } from '@/api/url';
 import { useAppModel, useUserModel } from '@/model';
+
+interface LoginResponse {
+  token: string;
+  role: number;
+}
 
 const router = useRouter();
 
@@ -20,23 +27,32 @@ const {
 
 const { setUser } = useUserModel();
 
+const { execute } = useAxios<ResponseWrap<LoginResponse>>(LOGIN_URL, { method: 'POST' }, instance, {
+  immediate: false,
+});
+
 const userInfo = reactive({
   username: '',
   password: '',
 });
 
 const handleLogin = () => {
-  if (
-    userInfo.username !== 'user1' &&
-    userInfo.username !== 'user2' &&
-    userInfo.username !== 'admin'
-  ) {
-    Message.error('用户名错误');
-    return;
-  }
+  execute({
+    data: {
+      username: userInfo.username,
+      password: userInfo.password,
+      system: 'MicroService',
+    },
+  }).then(item => {
+    if (item.error.value || !item.data.value) {
+      return;
+    }
 
-  setUser(userInfo.username, userInfo.username === 'admin' ? 'admin' : 'user');
-  router.replace({ name: 'Overview' });
+    const { token, role } = item.data.value.data as LoginResponse;
+
+    setUser(token, role === 1 ? 'admin' : 'user');
+    router.replace({ name: 'Overview' });
+  });
 };
 </script>
 

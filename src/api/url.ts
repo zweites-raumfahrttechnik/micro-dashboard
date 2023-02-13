@@ -18,3 +18,7 @@ export const VISIT_APPROVE_URL = `${v1}/visit/approve`;
 
 export const UPLOAD_PROTO_URL = `${v1}/upload/grpc`;
 export const TEMPLATE_LIST_URL = `${v1}/template/list`;
+
+const userV1 = '/user/v1';
+
+export const LOGIN_URL = `${userV1}/login`;

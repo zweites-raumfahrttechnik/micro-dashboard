@@ -1,11 +1,11 @@
 export interface SearchParams {
   pg: number;
   size: number;
+  createBy?: string;
+  type?: string;
   dataId?: string;
-  user?: string;
-  type?: number;
-  configType?: number;
-  status?: number;
+  configType?: string;
+  status?: string;
   startAt?: string;
   endAt?: string;
 }

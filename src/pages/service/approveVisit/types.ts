@@ -3,7 +3,7 @@ export interface SearchParams {
   size: number;
   name?: string;
   user?: string;
-  status?: number;
+  status?: string;
   startAt?: string;
   endAt?: string;
 }
