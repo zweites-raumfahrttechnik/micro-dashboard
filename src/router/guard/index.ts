@@ -4,5 +4,5 @@ import { setupAuth } from './auth';
 
 export default function bootstrapRouteGuard(router: Router) {
   setupNProgress(router);
-  setupAuth(router);
+  // setupAuth(router);
 }

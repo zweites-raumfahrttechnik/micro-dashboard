@@ -77,6 +77,48 @@ export interface ServiceDetail {
   visited: ServiceDetailVisited;
 }
 
+// 用户管理
+
+export interface CurrentUserInfo {
+  nickname: string;
+  auth: auth[];
+}
+
+export interface auth {
+  role: number;
+}
+
+export interface UserListData {
+  count: number;
+  data: UserItem[];
+}
+
+export interface UserItem {
+  uuid: string;
+  username: string;
+  nickname: string;
+}
+
+export interface AuthListData {
+  count: number;
+  data: AuthItem[];
+}
+
+export interface AuthItem {
+  uuid: string;
+  system: string;
+  auth: string;
+}
+
+export interface UserAuthInfoItem {
+  system: string;
+  role: number;
+}
+
+export interface UserAuthInfoData {
+  authList: UserAuthInfoItem[];
+}
+
 export interface TemplateListItem {
   templateName: string;
   status: number;
