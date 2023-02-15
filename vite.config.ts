@@ -17,7 +17,7 @@ export default defineConfig({
     ...createVuePlugin(),
     ...createAutoImportPlugin(),
     ...createArcoPlugin(),
-    //...createMockPlugin(),
+    // ...createMockPlugin(),
   ],
   server: {
     proxy: {

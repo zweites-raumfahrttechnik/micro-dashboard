@@ -123,7 +123,7 @@ const handleRejectConfig = async (uuid: string, status: 1 | 2, type: 1 | 2) => {
 
       <TableColumn title="类型">
         <template #cell="{ record }">
-          <span v-if="record.type === 1">修改（创建）申请</span>
+          <span v-if="record.type === 1">创建申请</span>
           <span v-else>删除申请</span>
         </template>
       </TableColumn>
