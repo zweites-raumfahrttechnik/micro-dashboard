@@ -9,13 +9,27 @@ const requests: MockMethod[] = [
     response: () => {
       return successResp({
         count: 100,
-        userdata: Array(15)
+        data: Array(15)
           .fill(1)
           .map(() => ({
-            uuid: Random.id(),
+            uuid: Random.uuid(),
             username: Random.string(undefined, 5, 10),
             nickname: Random.string(undefined, 5, 10),
-            authid: Array(5).fill(() => Random.integer(1, 10)),
+          })),
+      });
+    },
+  },
+
+  {
+    url: '/api/v1/user/auth',
+    method: 'get',
+    response: () => {
+      return successResp({
+        data: Array(15)
+          .fill(1)
+          .map(() => ({
+            system: Random.string(undefined, 5, 10),
+            role: Random.integer(0, 1),
           })),
       });
     },
@@ -27,13 +41,12 @@ const requests: MockMethod[] = [
     response: () => {
       return successResp({
         count: 100,
-        authdata: Array(15)
+        data: Array(15)
           .fill(1)
           .map(() => ({
-            id: Random.integer(1, 100),
-            uuid: Random.id(),
-            systemname: Random.string(undefined, 2, 2),
-            authname: Random.string(undefined, 5, 10),
+            uuid: Random.uuid(),
+            system: Random.string(undefined, 2, 2),
+            auth: Random.integer(0, 1),
           })),
       });
     },
@@ -69,7 +82,7 @@ const requests: MockMethod[] = [
         auth: Array(5)
           .fill(1)
           .map(() => ({
-            role: Random.integer(1, 10),
+            role: Random.integer(0, 1),
           })),
       });
     },

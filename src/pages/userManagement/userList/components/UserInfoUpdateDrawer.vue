@@ -17,13 +17,19 @@ import {
 import { instance } from '@/api';
 import { USER_URL } from '@/api/url';
 
-import { useDrawerStore } from '../hooks';
+import { useInfoUpdateDrawerStore } from '../hooks';
 
-const { drawerVisible, selectUser, UserInfoUpdateFormRef, isLoading, authData, selectLoadMore } =
-  useDrawerStore()!;
+const {
+  useInfoUpdateDrawerVisible,
+  selectUser,
+  UserInfoUpdateFormRef,
+  isLoading,
+  authData,
+  selectLoadMore,
+} = useInfoUpdateDrawerStore()!;
 
 const handleDisableInstance = () => {
-  drawerVisible.value = false;
+  useInfoUpdateDrawerVisible.value = false;
 };
 
 const { execute } = useAxios(USER_URL, { method: 'PUT' }, instance, {
@@ -41,7 +47,7 @@ const handleSubmit = async () => {
     },
   }).then(() => {
     UserInfoUpdateFormRef.value?.resetFields();
-    drawerVisible.value = false;
+    useInfoUpdateDrawerVisible.value = false;
   });
 };
 </script>
@@ -50,7 +56,7 @@ const handleSubmit = async () => {
   <Drawer
     placement="bottom"
     height="80%"
-    :visible="drawerVisible"
+    :visible="useInfoUpdateDrawerVisible"
     :footer="false"
     @cancel="handleDisableInstance"
   >
@@ -82,7 +88,7 @@ const handleSubmit = async () => {
             </FormItem>
           </Col>
           <Col :span="24">
-            <FormItem field="auth" label="权限id" :rules="[{ required: true, message: '必填' }]">
+            <FormItem field="auth" label="系统权限" :rules="[{ required: true, message: '必填' }]">
               <Select
                 v-model="selectUser.auth"
                 :loading="isLoading"
@@ -94,8 +100,8 @@ const handleSubmit = async () => {
                 size="large"
                 @dropdown-reach-bottom="selectLoadMore"
               >
-                <Option v-for="item in authData" :key="item.id" :value="item.id">
-                  {{ item.id }}
+                <Option v-for="item in authData" :key="item.system" :value="item.uuid"
+                  >{{ item.auth == '0' ? '用户 ' + item.system : '管理员 ' + item.system }}
                 </Option>
               </Select>
             </FormItem>
